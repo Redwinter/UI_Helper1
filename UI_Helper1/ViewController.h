@@ -28,6 +28,7 @@
 - (IBAction)pickImage:(id)sender;
 - (IBAction)showVisEditMenu:(id)sender;
 - (IBAction)showViewPropsMenu:(id)sender;
+- (IBAction)showHideView:(id)sender;
 - (IBAction)enableViewMoves:(id)sender;
 
 

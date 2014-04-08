@@ -40,6 +40,28 @@
     self.viewEditMenu.hidden = !self.viewEditMenu.hidden;
 }
 
+- (IBAction)showHideView:(id)sender
+{
+    BOOL show = NO;
+    if ([sender isKindOfClass:[UISwitch class] ]) {
+        UISwitch *sw = (UISwitch*)sender;
+        show = sw.on;
+    }
+    /**using tags to show/hide views. Any buttons tag +100 = the View's tag it shows/hides **/
+    UIView *sendingView = (UIView*)sender;
+    UIView *tgtView = [self.view viewWithTag:sendingView.tag+100];
+#ifdef DEBUG
+    NSLog(@"Showing/Hiding view tagged: %i which is a %@",sendingView.tag, [tgtView class]);
+#endif
+    if (show) {
+        tgtView.hidden = NO;
+    }
+    else{
+        tgtView.hidden = YES;
+    }
+    
+}
+
 - (IBAction)enableViewMoves:(id)sender
 {
     
