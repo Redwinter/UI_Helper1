@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UI_Helper1/ViewController.m"
-            timestampString = "418693093.848406"
+            timestampString = "418694766.328798"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "-showHideView:"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "-showInfoDeets:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

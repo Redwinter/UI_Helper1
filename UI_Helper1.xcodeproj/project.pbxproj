@@ -22,6 +22,7 @@
 		C755499118F36E7C00731693 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C755497018F36E7C00731693 /* UIKit.framework */; };
 		C755499918F36E7C00731693 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C755499718F36E7C00731693 /* InfoPlist.strings */; };
 		C755499B18F36E7C00731693 /* UI_Helper1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = C755499A18F36E7C00731693 /* UI_Helper1Tests.m */; };
+		C75549A618F4C2B300731693 /* selfie_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C75549A518F4C2B300731693 /* selfie_bg.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		C755499618F36E7C00731693 /* UI_Helper1Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UI_Helper1Tests-Info.plist"; sourceTree = "<group>"; };
 		C755499818F36E7C00731693 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C755499A18F36E7C00731693 /* UI_Helper1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UI_Helper1Tests.m; sourceTree = "<group>"; };
+		C75549A518F4C2B300731693 /* selfie_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selfie_bg.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 		C755497218F36E7C00731693 /* UI_Helper1 */ = {
 			isa = PBXGroup;
 			children = (
+				C75549A418F4C29800731693 /* resources */,
 				C755497B18F36E7C00731693 /* AppDelegate.h */,
 				C755497C18F36E7C00731693 /* AppDelegate.m */,
 				C755497E18F36E7C00731693 /* Main_iPhone.storyboard */,
@@ -153,6 +156,14 @@
 				C755499718F36E7C00731693 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C75549A418F4C29800731693 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				C75549A518F4C2B300731693 /* selfie_bg.png */,
+			);
+			name = resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +242,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C75549A618F4C2B300731693 /* selfie_bg.png in Resources */,
 				C755498318F36E7C00731693 /* Main_iPad.storyboard in Resources */,
 				C755498818F36E7C00731693 /* Images.xcassets in Resources */,
 				C755498018F36E7C00731693 /* Main_iPhone.storyboard in Resources */,

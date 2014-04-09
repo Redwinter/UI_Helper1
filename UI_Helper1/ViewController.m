@@ -18,14 +18,31 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    //create a context for images
+    self.context = [CIContext contextWithOptions:nil];
 }
 
 
 
 
-- (IBAction)pickImage:(id)sender
-{
+// get image from photos
+-(IBAction)pickImage:(id)sender{
+    UIImagePickerController *imagePicker;
+    imagePicker = [[UIImagePickerController alloc]init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.delegate = self;
     
+    [imagePicker setAllowsEditing:YES];
+    [imagePicker setModalPresentationStyle:UIModalPresentationCurrentContext];
+    
+    // forced to call this view this way due to errors
+    UIPopoverController *popOver = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
+    popOver.delegate = self;
+    self.popoverImageViewController = popOver;
+    [self.popoverImageViewController presentPopoverFromRect:CGRectMake(0, 0, 160, 40) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    
+    //[self presentViewController:imagePicker animated:YES completion:^{}];
 }
 
 - (IBAction)showVisEditMenu:(id)sender
@@ -67,6 +84,19 @@
     
 }
 
+- (IBAction)showInfoDeets:(id)sender
+{
+    // TODO: this could eventually pull up a panel of info steps about how to use the app
+    // for now, it will throw test images and stuff
+    if(!self.bgImageView.image){
+        UIImage* tempBg = [UIImage imageNamed:@"selfie_bg.png"];
+        self.bgImageView.image = tempBg;
+    }
+    else{
+        self.bgImageView.image = nil;
+    }
+    [self.bgImageView reloadInputViews];
+}
 
 
 

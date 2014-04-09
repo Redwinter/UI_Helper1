@@ -8,20 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<UIImagePickerControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate,UIPopoverControllerDelegate>
+
 
 @property (strong,nonatomic) CIContext *context;
 @property (strong, nonatomic) IBOutlet UIView *viewEditMenu;
 @property (strong, nonatomic) IBOutlet UIView *editVisMenu;
-@property (strong, nonatomic) IBOutlet UISwitch *BBar_Vis;
-@property (strong, nonatomic) IBOutlet UISwitch *TBar_Vis;
-@property (strong, nonatomic) IBOutlet UISwitch *HudL_Vis;
-@property (strong, nonatomic) IBOutlet UISwitch *HudR_Vis;
-@property (strong, nonatomic) IBOutlet UISwitch *BigLabel_Vis;
-@property (strong, nonatomic) IBOutlet UISwitch *MedLabel_Vis;
-
-
-@property (strong, nonatomic) IBOutlet UIImageView *backgroundView;
+@property (strong, nonatomic) IBOutlet UIImageView *bgImageView;
 @property (strong,nonatomic) IBOutlet UIPickerView *filterPicker;
 @property (strong) UIPopoverController *popoverImageViewController;
 
@@ -30,6 +23,7 @@
 - (IBAction)showViewPropsMenu:(id)sender;
 - (IBAction)showHideView:(id)sender;
 - (IBAction)enableViewMoves:(id)sender;
+- (IBAction)showInfoDeets:(id)sender;
 
 
 @end
