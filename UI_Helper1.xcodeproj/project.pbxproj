@@ -25,10 +25,10 @@
 		C75549A618F4C2B300731693 /* selfie_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C75549A518F4C2B300731693 /* selfie_bg.png */; };
 		C75549AA18F4D18600731693 /* reveal-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C75549A818F4D18600731693 /* reveal-icon.png */; };
 		C75549AB18F4D18600731693 /* reveal-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C75549A918F4D18600731693 /* reveal-icon@2x.png */; };
-		C75549B118F4D29100731693 /* CustomAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C75549AD18F4D29100731693 /* CustomAnimationController.m */; };
-		C75549B218F4D29100731693 /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C75549AF18F4D29100731693 /* RightViewController.m */; };
-		C75549B318F4D29100731693 /* RightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C75549B018F4D29100731693 /* RightViewController.xib */; };
-		C75549B618F4D36700731693 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C75549B518F4D36700731693 /* SWRevealViewController.m */; };
+		C763008A18F4E68F006D8223 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C763008918F4E68F006D8223 /* SpriteKit.framework */; };
+		C763008C18F4E69A006D8223 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C763008B18F4E69A006D8223 /* CoreText.framework */; };
+		C7FE0C0E18F5F8660067F54F /* DraggableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FE0C0D18F5F8660067F54F /* DraggableView.m */; };
+		C7FE0C1018F5FA740067F54F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FE0C0F18F5FA740067F54F /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,13 +65,11 @@
 		C75549A518F4C2B300731693 /* selfie_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selfie_bg.png; sourceTree = "<group>"; };
 		C75549A818F4D18600731693 /* reveal-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reveal-icon.png"; sourceTree = "<group>"; };
 		C75549A918F4D18600731693 /* reveal-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reveal-icon@2x.png"; sourceTree = "<group>"; };
-		C75549AC18F4D29100731693 /* CustomAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomAnimationController.h; path = "RevealController Lib/CustomAnimationController.h"; sourceTree = "<group>"; };
-		C75549AD18F4D29100731693 /* CustomAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomAnimationController.m; path = "RevealController Lib/CustomAnimationController.m"; sourceTree = "<group>"; };
-		C75549AE18F4D29100731693 /* RightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RightViewController.h; path = "RevealController Lib/RightViewController.h"; sourceTree = "<group>"; };
-		C75549AF18F4D29100731693 /* RightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RightViewController.m; path = "RevealController Lib/RightViewController.m"; sourceTree = "<group>"; };
-		C75549B018F4D29100731693 /* RightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RightViewController.xib; path = "RevealController Lib/RightViewController.xib"; sourceTree = "<group>"; };
-		C75549B418F4D36700731693 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = "RevealController Lib/SWRevealViewController.h"; sourceTree = "<group>"; };
-		C75549B518F4D36700731693 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = "RevealController Lib/SWRevealViewController.m"; sourceTree = "<group>"; };
+		C763008918F4E68F006D8223 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		C763008B18F4E69A006D8223 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		C7FE0C0C18F5F8660067F54F /* DraggableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggableView.h; sourceTree = "<group>"; };
+		C7FE0C0D18F5F8660067F54F /* DraggableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggableView.m; sourceTree = "<group>"; };
+		C7FE0C0F18F5FA740067F54F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +77,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7FE0C1018F5FA740067F54F /* QuartzCore.framework in Frameworks */,
+				C763008C18F4E69A006D8223 /* CoreText.framework in Frameworks */,
+				C763008A18F4E68F006D8223 /* SpriteKit.framework in Frameworks */,
 				C755496F18F36E7C00731693 /* CoreGraphics.framework in Frameworks */,
 				C755497118F36E7C00731693 /* UIKit.framework in Frameworks */,
 				C755496D18F36E7C00731693 /* Foundation.framework in Frameworks */,
@@ -120,6 +121,9 @@
 		C755496B18F36E7C00731693 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C7FE0C0F18F5FA740067F54F /* QuartzCore.framework */,
+				C763008B18F4E69A006D8223 /* CoreText.framework */,
+				C763008918F4E68F006D8223 /* SpriteKit.framework */,
 				C755496C18F36E7C00731693 /* Foundation.framework */,
 				C755496E18F36E7C00731693 /* CoreGraphics.framework */,
 				C755497018F36E7C00731693 /* UIKit.framework */,
@@ -135,11 +139,12 @@
 				C755497C18F36E7C00731693 /* AppDelegate.m */,
 				C755497E18F36E7C00731693 /* Main_iPhone.storyboard */,
 				C755498118F36E7C00731693 /* Main_iPad.storyboard */,
+				C7FE0C0C18F5F8660067F54F /* DraggableView.h */,
+				C7FE0C0D18F5F8660067F54F /* DraggableView.m */,
 				C755498418F36E7C00731693 /* ViewController.h */,
 				C755498518F36E7C00731693 /* ViewController.m */,
 				C755498718F36E7C00731693 /* Images.xcassets */,
 				C75549A418F4C29800731693 /* Resources */,
-				C75549A718F4D0C500731693 /* Library */,
 				C755497318F36E7C00731693 /* Supporting Files */,
 			);
 			path = UI_Helper1;
@@ -182,20 +187,6 @@
 				C75549A518F4C2B300731693 /* selfie_bg.png */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		C75549A718F4D0C500731693 /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				C75549B418F4D36700731693 /* SWRevealViewController.h */,
-				C75549B518F4D36700731693 /* SWRevealViewController.m */,
-				C75549AC18F4D29100731693 /* CustomAnimationController.h */,
-				C75549AD18F4D29100731693 /* CustomAnimationController.m */,
-				C75549AE18F4D29100731693 /* RightViewController.h */,
-				C75549AF18F4D29100731693 /* RightViewController.m */,
-				C75549B018F4D29100731693 /* RightViewController.xib */,
-			);
-			name = Library;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,7 +270,6 @@
 				C75549AB18F4D18600731693 /* reveal-icon@2x.png in Resources */,
 				C755498818F36E7C00731693 /* Images.xcassets in Resources */,
 				C755498018F36E7C00731693 /* Main_iPhone.storyboard in Resources */,
-				C75549B318F4D29100731693 /* RightViewController.xib in Resources */,
 				C755497718F36E7C00731693 /* InfoPlist.strings in Resources */,
 				C75549AA18F4D18600731693 /* reveal-icon.png in Resources */,
 			);
@@ -300,12 +290,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C75549B218F4D29100731693 /* RightViewController.m in Sources */,
 				C755498618F36E7C00731693 /* ViewController.m in Sources */,
-				C75549B118F4D29100731693 /* CustomAnimationController.m in Sources */,
 				C755497D18F36E7C00731693 /* AppDelegate.m in Sources */,
+				C7FE0C0E18F5F8660067F54F /* DraggableView.m in Sources */,
 				C755497918F36E7C00731693 /* main.m in Sources */,
-				C75549B618F4D36700731693 /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +508,7 @@
 				C75549A018F36E7C00731693 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C75549A118F36E7C00731693 /* Build configuration list for PBXNativeTarget "UI_Helper1Tests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +517,7 @@
 				C75549A318F36E7C00731693 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
