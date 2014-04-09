@@ -83,11 +83,10 @@
 {
     
 }
-
-- (IBAction)showInfoDeets:(id)sender
+- (IBAction)resetToDefault:(id)sender
 {
-    // TODO: this could eventually pull up a panel of info steps about how to use the app
-    // for now, it will throw test images and stuff
+    // TODO: set this to take tag & set that view back to default state
+    //for now, it will just throw test images and stuff
     if(!self.bgImageView.image){
         UIImage* tempBg = [UIImage imageNamed:@"selfie_bg.png"];
         self.bgImageView.image = tempBg;
@@ -98,9 +97,33 @@
     [self.bgImageView reloadInputViews];
 }
 
+- (IBAction)showInfoDeets:(id)sender
+{
+    // TODO: this could eventually pull up a panel of info steps about how to use the app
+   
+}
+
+- (IBAction)showControls:(id)sender
+{
+    // this will be a button triggered control panel slide in/out for now
+    // TODO: add drag
+    
+}
 
 
+#pragma mark -Delegate Methods-
 
+//do this when a photo is picked
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    // clear the VC (adjusted for popover req)
+    [self.popoverImageViewController dismissPopoverAnimated:YES];
+    
+    // add the image to our view (284x213px for 4:3 aspect ratio)
+    self.bgImageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+}
 
 
 - (void)didReceiveMemoryWarning

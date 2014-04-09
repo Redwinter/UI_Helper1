@@ -23,6 +23,12 @@
 		C755499918F36E7C00731693 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C755499718F36E7C00731693 /* InfoPlist.strings */; };
 		C755499B18F36E7C00731693 /* UI_Helper1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = C755499A18F36E7C00731693 /* UI_Helper1Tests.m */; };
 		C75549A618F4C2B300731693 /* selfie_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C75549A518F4C2B300731693 /* selfie_bg.png */; };
+		C75549AA18F4D18600731693 /* reveal-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C75549A818F4D18600731693 /* reveal-icon.png */; };
+		C75549AB18F4D18600731693 /* reveal-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C75549A918F4D18600731693 /* reveal-icon@2x.png */; };
+		C75549B118F4D29100731693 /* CustomAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C75549AD18F4D29100731693 /* CustomAnimationController.m */; };
+		C75549B218F4D29100731693 /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C75549AF18F4D29100731693 /* RightViewController.m */; };
+		C75549B318F4D29100731693 /* RightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C75549B018F4D29100731693 /* RightViewController.xib */; };
+		C75549B618F4D36700731693 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C75549B518F4D36700731693 /* SWRevealViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +63,15 @@
 		C755499818F36E7C00731693 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C755499A18F36E7C00731693 /* UI_Helper1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UI_Helper1Tests.m; sourceTree = "<group>"; };
 		C75549A518F4C2B300731693 /* selfie_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selfie_bg.png; sourceTree = "<group>"; };
+		C75549A818F4D18600731693 /* reveal-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reveal-icon.png"; sourceTree = "<group>"; };
+		C75549A918F4D18600731693 /* reveal-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reveal-icon@2x.png"; sourceTree = "<group>"; };
+		C75549AC18F4D29100731693 /* CustomAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomAnimationController.h; path = "RevealController Lib/CustomAnimationController.h"; sourceTree = "<group>"; };
+		C75549AD18F4D29100731693 /* CustomAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomAnimationController.m; path = "RevealController Lib/CustomAnimationController.m"; sourceTree = "<group>"; };
+		C75549AE18F4D29100731693 /* RightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RightViewController.h; path = "RevealController Lib/RightViewController.h"; sourceTree = "<group>"; };
+		C75549AF18F4D29100731693 /* RightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RightViewController.m; path = "RevealController Lib/RightViewController.m"; sourceTree = "<group>"; };
+		C75549B018F4D29100731693 /* RightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RightViewController.xib; path = "RevealController Lib/RightViewController.xib"; sourceTree = "<group>"; };
+		C75549B418F4D36700731693 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = "RevealController Lib/SWRevealViewController.h"; sourceTree = "<group>"; };
+		C75549B518F4D36700731693 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = "RevealController Lib/SWRevealViewController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +131,6 @@
 		C755497218F36E7C00731693 /* UI_Helper1 */ = {
 			isa = PBXGroup;
 			children = (
-				C75549A418F4C29800731693 /* resources */,
 				C755497B18F36E7C00731693 /* AppDelegate.h */,
 				C755497C18F36E7C00731693 /* AppDelegate.m */,
 				C755497E18F36E7C00731693 /* Main_iPhone.storyboard */,
@@ -124,6 +138,8 @@
 				C755498418F36E7C00731693 /* ViewController.h */,
 				C755498518F36E7C00731693 /* ViewController.m */,
 				C755498718F36E7C00731693 /* Images.xcassets */,
+				C75549A418F4C29800731693 /* Resources */,
+				C75549A718F4D0C500731693 /* Library */,
 				C755497318F36E7C00731693 /* Supporting Files */,
 			);
 			path = UI_Helper1;
@@ -158,12 +174,28 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		C75549A418F4C29800731693 /* resources */ = {
+		C75549A418F4C29800731693 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C75549A818F4D18600731693 /* reveal-icon.png */,
+				C75549A918F4D18600731693 /* reveal-icon@2x.png */,
 				C75549A518F4C2B300731693 /* selfie_bg.png */,
 			);
-			name = resources;
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		C75549A718F4D0C500731693 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				C75549B418F4D36700731693 /* SWRevealViewController.h */,
+				C75549B518F4D36700731693 /* SWRevealViewController.m */,
+				C75549AC18F4D29100731693 /* CustomAnimationController.h */,
+				C75549AD18F4D29100731693 /* CustomAnimationController.m */,
+				C75549AE18F4D29100731693 /* RightViewController.h */,
+				C75549AF18F4D29100731693 /* RightViewController.m */,
+				C75549B018F4D29100731693 /* RightViewController.xib */,
+			);
+			name = Library;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,9 +276,12 @@
 			files = (
 				C75549A618F4C2B300731693 /* selfie_bg.png in Resources */,
 				C755498318F36E7C00731693 /* Main_iPad.storyboard in Resources */,
+				C75549AB18F4D18600731693 /* reveal-icon@2x.png in Resources */,
 				C755498818F36E7C00731693 /* Images.xcassets in Resources */,
 				C755498018F36E7C00731693 /* Main_iPhone.storyboard in Resources */,
+				C75549B318F4D29100731693 /* RightViewController.xib in Resources */,
 				C755497718F36E7C00731693 /* InfoPlist.strings in Resources */,
+				C75549AA18F4D18600731693 /* reveal-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,9 +300,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C75549B218F4D29100731693 /* RightViewController.m in Sources */,
 				C755498618F36E7C00731693 /* ViewController.m in Sources */,
+				C75549B118F4D29100731693 /* CustomAnimationController.m in Sources */,
 				C755497D18F36E7C00731693 /* AppDelegate.m in Sources */,
 				C755497918F36E7C00731693 /* main.m in Sources */,
+				C75549B618F4D36700731693 /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

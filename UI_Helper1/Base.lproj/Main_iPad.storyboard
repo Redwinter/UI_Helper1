@@ -571,44 +571,6 @@
                                     <constraint firstAttribute="bottom" secondItem="Nq1-m4-KPr" secondAttribute="bottom" constant="20" symbolic="YES" id="lXI-Ne-UDU"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lgz-qn-CMN" userLabel="Edit_Vis_Button_2">
-                                <rect key="frame" x="450" y="2" width="134" height="114"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.22005365424608411" green="0.87323794157608692" blue="0.21160894903311547" alpha="0.66000000000000003" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="134" id="DPA-cC-ps8"/>
-                                </constraints>
-                                <state key="normal" title="EDIT VIS">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="showVisEditMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YNn-jU-pGA"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4DW-pG-jhp" userLabel="Edit_Layout_Button_1">
-                                <rect key="frame" x="613" y="2" width="134" height="114"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.22005365424608411" green="0.87323794157608692" blue="0.21160894903311547" alpha="0.66000000000000003" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="134" id="Zdh-4P-4Fz"/>
-                                </constraints>
-                                <state key="normal" title="EDIT Layout">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="showViewPropsMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="u6v-n0-9X3"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUg-e3-56O" userLabel="Info_Btn_TEMP">
-                                <rect key="frame" x="988" y="25" width="22" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="showInfoDeets:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dgo-IJ-EaD"/>
-                                </connections>
-                            </button>
                             <view hidden="YES" tag="101" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yg1-ed-kGw" userLabel="View Properties Menu_101">
                                 <rect key="frame" x="332" y="134" width="360" height="500"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1200,6 +1162,62 @@
                                     <constraint firstItem="oIu-4P-pIj" firstAttribute="top" secondItem="ESl-Fw-lgQ" secondAttribute="top" constant="19" id="zfv-Pf-OCu"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mCk-1C-KUs" userLabel="Controls_Cont">
+                                <rect key="frame" x="504" y="136" width="528" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K5T-20-Xg1" userLabel="ContSliderButton">
+                                        <rect key="frame" x="3" y="0.0" width="49" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.2200536542" green="0.87323794160000001" blue="0.21160894899999999" alpha="0.66000000000000003" colorSpace="calibratedRGB"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showControls:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mxU-Nr-bPN"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lgz-qn-CMN" userLabel="Edit_Vis_Button_2">
+                                        <rect key="frame" x="94" y="8" width="134" height="114"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.22005365424608411" green="0.87323794157608692" blue="0.21160894903311547" alpha="0.66000000000000003" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="134" id="DPA-cC-ps8"/>
+                                        </constraints>
+                                        <state key="normal" title="EDIT VIS">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showVisEditMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YNn-jU-pGA"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4DW-pG-jhp" userLabel="Edit_Layout_Button_1">
+                                        <rect key="frame" x="252" y="8" width="134" height="114"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.22005365424608411" green="0.87323794157608692" blue="0.21160894903311547" alpha="0.66000000000000003" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="134" id="Zdh-4P-4Fz"/>
+                                        </constraints>
+                                        <state key="normal" title="EDIT Layout">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showViewPropsMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="u6v-n0-9X3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUg-e3-56O" userLabel="Info_Btn_TEMP">
+                                        <rect key="frame" x="424" y="54" width="22" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showInfoDeets:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dgo-IJ-EaD"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.11589574809122061" green="1" blue="0.19519185346168266" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -1211,14 +1229,11 @@
                             <constraint firstItem="1gF-aX-TwU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="9ky-e0-b3g"/>
                             <constraint firstItem="6i8-ha-WTs" firstAttribute="trailing" secondItem="iq0-yO-OAh" secondAttribute="trailing" id="EB7-Gq-aZw"/>
                             <constraint firstItem="yg1-ed-kGw" firstAttribute="top" secondItem="6i8-ha-WTs" secondAttribute="bottom" constant="34" id="Eua-lh-4Kh"/>
-                            <constraint firstItem="lgz-qn-CMN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="450" id="Fi9-gZ-mO6"/>
-                            <constraint firstItem="TUg-e3-56O" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="5" id="JJM-AS-SL1"/>
                             <constraint firstAttribute="trailing" secondItem="k2j-oD-wd5" secondAttribute="trailing" constant="735" id="KkR-bd-BWg"/>
                             <constraint firstItem="6i8-ha-WTs" firstAttribute="leading" secondItem="gtU-Gw-cX4" secondAttribute="leading" id="Leg-Fd-QWK"/>
                             <constraint firstAttribute="trailing" secondItem="gtU-Gw-cX4" secondAttribute="trailing" constant="768" id="M1S-ob-chs"/>
                             <constraint firstItem="gtU-Gw-cX4" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="567" id="NO0-ws-fl7"/>
                             <constraint firstAttribute="bottom" secondItem="1gF-aX-TwU" secondAttribute="bottom" id="OLo-9Z-iqi"/>
-                            <constraint firstItem="yg1-ed-kGw" firstAttribute="top" secondItem="4DW-pG-jhp" secondAttribute="bottom" constant="18" id="QzI-lq-Oeq"/>
                             <constraint firstItem="ESl-Fw-lgQ" firstAttribute="top" secondItem="yg1-ed-kGw" secondAttribute="top" id="RLs-d1-1Bw"/>
                             <constraint firstItem="gtU-Gw-cX4" firstAttribute="leading" secondItem="iq0-yO-OAh" secondAttribute="leading" id="TCJ-fz-kH9"/>
                             <constraint firstItem="k2j-oD-wd5" firstAttribute="top" secondItem="6i8-ha-WTs" secondAttribute="top" id="UME-io-fb5"/>
@@ -1226,22 +1241,17 @@
                             <constraint firstItem="iq0-yO-OAh" firstAttribute="top" secondItem="ESl-Fw-lgQ" secondAttribute="bottom" constant="194" id="X3u-FK-W5b"/>
                             <constraint firstItem="1pj-0O-CvD" firstAttribute="trailing" secondItem="iq0-yO-OAh" secondAttribute="trailing" id="YHL-vx-vIX"/>
                             <constraint firstItem="ESl-Fw-lgQ" firstAttribute="centerX" secondItem="iq0-yO-OAh" secondAttribute="centerX" id="ZKH-TD-72W"/>
-                            <constraint firstItem="ESl-Fw-lgQ" firstAttribute="top" secondItem="lgz-qn-CMN" secondAttribute="bottom" constant="18" id="ZOb-An-I5z"/>
                             <constraint firstItem="6YK-1I-RJu" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="88" id="bMp-9X-knj"/>
                             <constraint firstItem="iq0-yO-OAh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="672" id="c6P-xu-d8D"/>
                             <constraint firstItem="iq0-yO-OAh" firstAttribute="top" secondItem="gtU-Gw-cX4" secondAttribute="bottom" id="emY-Eg-8bA"/>
                             <constraint firstItem="iq0-yO-OAh" firstAttribute="trailing" secondItem="1gF-aX-TwU" secondAttribute="trailing" id="f3Y-LD-qoE"/>
                             <constraint firstItem="ESl-Fw-lgQ" firstAttribute="centerX" secondItem="6YK-1I-RJu" secondAttribute="centerX" id="gNX-RH-ygs"/>
                             <constraint firstItem="ESl-Fw-lgQ" firstAttribute="trailing" secondItem="yg1-ed-kGw" secondAttribute="trailing" id="hRl-hM-4cx"/>
-                            <constraint firstAttribute="trailing" secondItem="TUg-e3-56O" secondAttribute="trailing" constant="14" id="iYJ-8J-jBW"/>
                             <constraint firstItem="ESl-Fw-lgQ" firstAttribute="leading" secondItem="yg1-ed-kGw" secondAttribute="leading" id="jUt-QD-jb7"/>
                             <constraint firstItem="iq0-yO-OAh" firstAttribute="leading" secondItem="1gF-aX-TwU" secondAttribute="leading" id="php-jy-PKf"/>
                             <constraint firstItem="1pj-0O-CvD" firstAttribute="bottom" secondItem="gtU-Gw-cX4" secondAttribute="bottom" id="r7v-gb-z2Y"/>
                             <constraint firstItem="iq0-yO-OAh" firstAttribute="top" secondItem="6YK-1I-RJu" secondAttribute="bottom" constant="88" id="rFI-LQ-aiT"/>
                             <constraint firstItem="6i8-ha-WTs" firstAttribute="top" secondItem="1gF-aX-TwU" secondAttribute="top" id="rvd-cS-twn"/>
-                            <constraint firstItem="lgz-qn-CMN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="2" id="snB-lU-b9h"/>
-                            <constraint firstItem="4DW-pG-jhp" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="2" id="sxe-i0-vO9"/>
-                            <constraint firstItem="4DW-pG-jhp" firstAttribute="leading" secondItem="lgz-qn-CMN" secondAttribute="trailing" constant="29" id="uz8-aQ-Xnh"/>
                             <constraint firstItem="ESl-Fw-lgQ" firstAttribute="centerY" secondItem="1gF-aX-TwU" secondAttribute="centerY" constant="-80.5" id="vqo-q1-W9F"/>
                             <constraint firstItem="6YK-1I-RJu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="38" id="w91-be-hcW"/>
                             <constraint firstItem="iq0-yO-OAh" firstAttribute="bottom" secondItem="1gF-aX-TwU" secondAttribute="bottom" id="xQ3-HE-VA0"/>
@@ -1253,6 +1263,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="bgImageView" destination="1gF-aX-TwU" id="nFQ-Gd-2n5"/>
+                        <outlet property="controlsView" destination="mCk-1C-KUs" id="KaJ-sy-VdU"/>
                         <outlet property="editVisMenu" destination="ESl-Fw-lgQ" id="bqB-vB-lOU"/>
                         <outlet property="viewEditMenu" destination="yg1-ed-kGw" id="kwl-DZ-laN"/>
                     </connections>
@@ -1260,22 +1271,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--View Controller-->
+        <!--SideBarView Controller-->
         <scene sceneID="mqz-JW-UBS">
             <objects>
-                <viewController id="YAA-gA-qCB" sceneMemberID="viewController">
+                <viewController title="SideBarView Controller" id="YAA-gA-qCB" userLabel="SideBarView Controller" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xCJ-AZ-p5l"/>
                         <viewControllerLayoutGuide type="bottom" id="ORP-6K-9E9"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="eTO-ZW-Cik">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hlp-y6-s9y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1293" y="-649"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

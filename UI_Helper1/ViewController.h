@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *bgImageView;
 @property (strong,nonatomic) IBOutlet UIPickerView *filterPicker;
 @property (strong) UIPopoverController *popoverImageViewController;
+@property (strong,nonatomic) IBOutlet UIView *controlsView;
 
 - (IBAction)pickImage:(id)sender;
 - (IBAction)showVisEditMenu:(id)sender;
@@ -24,6 +25,8 @@
 - (IBAction)showHideView:(id)sender;
 - (IBAction)enableViewMoves:(id)sender;
 - (IBAction)showInfoDeets:(id)sender;
+- (IBAction)resetToDefault:(id)sender;
+- (IBAction)showControls:(id)sender;
 
 
 @end
