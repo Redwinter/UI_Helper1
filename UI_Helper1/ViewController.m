@@ -15,7 +15,7 @@
 
 @implementation ViewController
 
-@synthesize isEditing, touchOffset, dragObject, homePosition, dropTarget, editButton, viewVisButton, testButton;
+@synthesize isEditing, touchOffset, dragObject, homePosition, dropTarget, editButton, viewVisButton, testButton, currentViewEdits;
 
 - (void)viewDidLoad
 {
@@ -25,6 +25,7 @@
     //create a context for images
     self.context = [CIContext contextWithOptions:nil];
     self.isEditing = NO;
+    self.currentViewEdits = [NSMutableDictionary dictionary];
 }
 
 
@@ -46,13 +47,17 @@
     // & have button enable dragging views around and pos
     if(self.viewPropsMenu.hidden)self.viewPropsMenu.hidden = NO;
     [self.view bringSubviewToFront:self.viewPropsMenu];
-    self.editObject = (UIView*)self.dragObject;
+    self.editObject = self.dragObject;
     [self hideControls:sender];
 }
 
 - (IBAction)dismissViewPropsMenu:(id)sender
 {
   // TODO: apply (& save paid) props for edited view
+    // set all the values for the new edits if they have changed
+    // apply & updateConstraints
+    
+    
     self.viewPropsMenu.hidden = YES;
     
     [self hideBorder:self.dragObject];
@@ -116,6 +121,12 @@
         self.dragObject = nil;
     }
     self.editObject = nil;
+}
+
+
+- (IBAction)updateEditedViewWithChanges:(NSMutableDictionary*)changes
+{
+    
 }
 
 - (IBAction)resetToDefault:(id)sender
@@ -282,7 +293,9 @@
              [self showViewPropsMenu:self.dragObject];
          }
          
+         // TODO: test if its the BG via tag & show an option to change its image
          
+ // TODO: remove. f's up drop
 //        if (touchPoint.x > self.dropTarget.frame.origin.x &&
 //            touchPoint.x < self.dropTarget.frame.origin.x + self.dropTarget.frame.size.width &&
 //            touchPoint.y > self.dropTarget.frame.origin.y &&
@@ -345,12 +358,6 @@
     //[self presentViewController:imagePicker animated:YES completion:^{}];
 }
 
-
-
-#pragma mark -Delegate Methods-
-
-
-
 //do this when a photo is picked
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -358,10 +365,25 @@
     // clear the VC (adjusted for popover req)
     [self.popoverImageViewController dismissPopoverAnimated:YES];
     
-    // add the image to our view (284x213px for 4:3 aspect ratio)
-    self.bgImageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    //self.bgImageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    if(self.editObject){
+        self.editObject.backgroundImage.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    }
+    else{
+        NSLog(@"ERROR: No editObject found for setting BG Image");
+    }
     
 }
+
+- (IBAction)clearBGImage:(id)sender
+{
+    //self.bgImageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    if(self.editObject)self.editObject.backgroundImage.image = nil;
+    
+}
+
+#pragma mark -Picker Delegate Methods-
+
 
 // picker datasource
 // returns the number of 'columns' to display.
@@ -402,6 +424,7 @@
     self.editButton = nil;
     self.testButton = nil;
     self.viewVisButton = nil;
+    self.currentViewEdits = nil;
 }
 
 @end

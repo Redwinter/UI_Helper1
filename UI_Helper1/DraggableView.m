@@ -10,7 +10,7 @@
 
 @implementation DraggableView
 
-@synthesize isDragging;
+@synthesize isDragging, backgroundImage;
 
 - (id)initWithFrame:(CGRect)frame
 {

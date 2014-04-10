@@ -18,7 +18,7 @@
 // touch stuff
 @property (nonatomic, strong) IBOutlet UIView *dropTarget; //TODO: can create a snap to location with this
 @property (nonatomic, strong) DraggableView *dragObject; // indicates what is being dragged
-@property (nonatomic, strong) UIView *editObject; // indicates what is being edited
+@property (nonatomic, strong) DraggableView *editObject; // indicates what is being edited
 @property (nonatomic, assign) CGPoint touchOffset;
 @property (nonatomic, assign) CGPoint homePosition;
 
@@ -36,9 +36,10 @@
 @property (strong)IBOutlet UIButton *editButton;
 @property (strong)IBOutlet UIButton *testButton;
 
-
+@property (strong)IBOutlet NSMutableDictionary *currentViewEdits;
 
 - (IBAction)pickImage:(id)sender;
+- (IBAction)clearBGImage:(id)sender;
 
 - (IBAction)showVisEditMenu:(id)sender;
 
@@ -49,6 +50,8 @@
 - (IBAction)showHideView:(id)sender;
 - (IBAction)enableViewEdits:(id)sender;
 - (IBAction)doneEditing:(id)sender;
+
+- (IBAction)updateEditedViewWithChanges:(NSMutableDictionary*)changes;
 
 
 - (IBAction)showInfoDeets:(id)sender;

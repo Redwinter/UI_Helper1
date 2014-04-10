@@ -11,5 +11,9 @@
 @interface DraggableView : UIView
 
 @property (nonatomic) BOOL isDragging;
+@property (nonatomic) BOOL canDrag;
+@property (nonatomic) IBOutlet UIImageView *backgroundImage;
+
+
 
 @end
