@@ -10,6 +10,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "DraggableView.h"
+#import "PropsMenuView.h"
 
 @interface ViewController : UIViewController<UIImagePickerControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate,UIPopoverControllerDelegate>
 
@@ -23,7 +24,7 @@
 @property (nonatomic, assign) CGPoint homePosition;
 
 @property (strong,nonatomic) CIContext *context;
-@property (strong, nonatomic) IBOutlet UIView *viewPropsMenu; // TODO: determine when best to show
+@property (strong, nonatomic) IBOutlet PropsMenuView *viewPropsMenu; 
 @property (strong, nonatomic) IBOutlet UIView *editVisMenu;
 @property (strong, nonatomic) IBOutlet UIImageView *bgImageView;
 @property (strong,nonatomic) IBOutlet UIPickerView *filterPicker;
@@ -50,8 +51,6 @@
 - (IBAction)showHideView:(id)sender;
 - (IBAction)enableViewEdits:(id)sender;
 - (IBAction)doneEditing:(id)sender;
-
-- (IBAction)updateEditedViewWithChanges:(NSMutableDictionary*)changes;
 
 
 - (IBAction)showInfoDeets:(id)sender;

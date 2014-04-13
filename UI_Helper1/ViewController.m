@@ -30,128 +30,6 @@
 
 
 #pragma mark - Menus -
-
-
-// currently this flips it back n forth between hide/show for speed
-- (IBAction)showVisEditMenu:(id)sender
-{
-    self.editVisMenu.hidden = !self.editVisMenu.hidden;
-    [self hideControls:sender];
-}
-
-
-
-- (IBAction)showViewPropsMenu:(id)sender
-{
-    // NOTE: temp on button trigger. remove and have AFTER a view touched & moved
-    // & have button enable dragging views around and pos
-    if(self.viewPropsMenu.hidden)self.viewPropsMenu.hidden = NO;
-    [self.view bringSubviewToFront:self.viewPropsMenu];
-    self.editObject = self.dragObject;
-    [self hideControls:sender];
-}
-
-- (IBAction)dismissViewPropsMenu:(id)sender
-{
-  // TODO: apply (& save paid) props for edited view
-    // set all the values for the new edits if they have changed
-    // apply & updateConstraints
-    
-    
-    self.viewPropsMenu.hidden = YES;
-    
-    [self hideBorder:self.dragObject];
-#ifdef DEBUG
-    NSLog(@"Dismissing View Props for View %@", self.editObject);
-#endif
-    self.editObject = nil;
-    [self hideControls:sender];
-}
-
-
-
-
-// will use this now for most show/hide behavior
-- (IBAction)showHideView:(id)sender
-{
-    BOOL show = NO;
-    /**using tags to show/hide views. Any buttons tag +100 = the View's tag it shows/hides **/
-    UIView *sendingView = (UIView*)sender;
-    
-    if ([sender isKindOfClass:[UISwitch class] ]) {
-        UIView *tgtView = [self.view viewWithTag:sendingView.tag+100];
-        UISwitch *sw = (UISwitch*)sender;
-        show = sw.on;
-        
-        if (show) {
-            tgtView.hidden = NO;
-        }
-        else{
-            tgtView.hidden = YES;
-        }
-#ifdef DEBUG
-        NSLog(@"Showing/Hiding view tagged: %i which is a %@",sendingView.tag, [tgtView class]);
-#endif
-    }
-    else{
-        sendingView.hidden = !sendingView.hidden;
-        
-        // TODO: can do alpha fades here instead of snap hide
-#ifdef DEBUG
-        NSLog(@"Showing/Hiding view tagged: %i which is a %@",sendingView.tag, [sendingView class]);
-#endif
-    }
-    
-}
-
-- (IBAction)enableViewEdits:(id)sender
-{
-    self.isEditing = YES;
-    self.editLabelView.hidden = NO;
-    [self.view bringSubviewToFront:self.editLabelView];
-    [self hideControls:sender];
-}
-
-- (IBAction)doneEditing:(id)sender
-{
-    self.editLabelView.hidden = YES;
-    self.isEditing = NO;
-    if (self.dragObject) {
-        [self hideBorder:self.dragObject];
-        self.dragObject = nil;
-    }
-    self.editObject = nil;
-}
-
-
-- (IBAction)updateEditedViewWithChanges:(NSMutableDictionary*)changes
-{
-    
-}
-
-- (IBAction)resetToDefault:(id)sender
-{
-    // TODO: set this to take tag & set that view back to default state
-}
-
-- (IBAction)showInfoDeets:(id)sender
-{
-    // TODO: this could eventually pull up a panel of info steps about how to use the app
-
-    //for now, it will just throw test images and stuff
-    if(!self.bgImageView.image){
-        UIImage* tempBg = [UIImage imageNamed:@"selfie_bg.png"];
-        self.bgImageView.image = tempBg;
-    }
-    else{
-        self.bgImageView.image = nil;
-    }
-    [self.bgImageView reloadInputViews];
-    
-    [self hideControls:sender];
-    
-}
-
 - (IBAction)showControls:(id)sender
 {
     // hide control on touchup (if not editing & not hid)
@@ -179,9 +57,158 @@
         self.controlsView.alpha = 0.0;
         
         [UIView commitAnimations];
-
+        
     }
 }
+
+#pragma mark -Visibility Menu-
+
+// currently this flips it back n forth between hide/show for speed
+- (IBAction)showVisEditMenu:(id)sender
+{
+    self.editVisMenu.hidden = !self.editVisMenu.hidden;
+    [self hideControls:sender];
+}
+
+#pragma mark -Editing Menus-
+
+- (IBAction)showViewPropsMenu:(id)sender
+{
+    // NOTE: temp on button trigger. remove and have AFTER a view touched & moved
+    // & have button enable dragging views around and pos
+    if(self.viewPropsMenu.hidden)self.viewPropsMenu.hidden = NO;
+    [self.view bringSubviewToFront:self.viewPropsMenu];
+    self.editObject = self.dragObject;
+    
+    [self loadPropsForView:self.editObject];// note: no need to pass var here yet
+    
+    [self hideControls:sender];
+}
+
+- (IBAction)dismissViewPropsMenu:(id)sender
+{
+  // TODO: apply (& save paid) props for edited view
+    // set all the values for the new edits if they have changed
+    // apply & updateConstraints
+    
+    
+    self.viewPropsMenu.hidden = YES;
+    
+    [self hideBorder:self.dragObject];
+#ifdef DEBUG
+    NSLog(@"Dismissing View Props for View %@", self.editObject);
+#endif
+    self.editObject = nil;
+    [self hideControls:sender];
+}
+
+
+- (IBAction)enableViewEdits:(id)sender
+{
+    self.isEditing = YES;
+    self.editLabelView.hidden = NO;
+    [self.view bringSubviewToFront:self.editLabelView];
+    [self hideControls:sender];
+}
+
+- (void)loadPropsForView:(id)sender;
+{
+    if (sender == nil) {
+        NSLog(@"ERROR: Trying to loadProps for nil editObject! Bailing");
+        return;
+    }
+    // tgt View is self.editObject/dragObject here for now (remembered, not sent in to method)
+    // TODO: can actually load in from saved plists later, for now just fill with what's shown
+    
+    // size
+    self.viewPropsMenu.tgtWidth_.text = [NSString stringWithFormat:@"%f", self.editObject.frame.size.width];
+    self.viewPropsMenu.tgtHeight_.text = [NSString stringWithFormat:@"%f", self.editObject.frame.size.height];
+    
+    
+    // position (NOTE: THESE ARE FROM ORIGIN) // TODO: add option to convert to center pos
+    self.viewPropsMenu.tgtX_.text = [NSString stringWithFormat:@"%f", self.editObject.frame.origin.x];
+    self.viewPropsMenu.tgtY_.text = [NSString stringWithFormat:@"%f", self.editObject.frame.origin.y];
+    self.viewPropsMenu.tgtZ_.text = [NSString stringWithFormat:@"%f", self.editObject.layer.zPosition];
+    
+    // rotation
+    CGFloat radians = atan2f(self.editObject.transform.b, self.editObject.transform.a);
+    CGFloat degreesRot = radians * (180 / M_PI);
+    self.viewPropsMenu.tgtRot_.text = [NSString stringWithFormat:@"%f", degreesRot];
+    
+    //TODO: skew
+    //    CGFloat radians = atan2f(self.editObject.transform.b, self.editObject.transform.a);
+    //    CGFloat degreesRot = radians * (180 / M_PI);
+    //    self.viewPropsMenu.tgtRot_.text = [NSString stringWithFormat:@"%f", degreesRot];
+    
+    //BgColor
+    const CGFloat* components = CGColorGetComponents(self.editObject.backgroundColor.CGColor);
+    self.viewPropsMenu.tgtBGColor_R_.text =[NSString stringWithFormat:@"%f", components[0]];
+    self.viewPropsMenu.tgtBGColor_G_.text = [NSString stringWithFormat:@"%f", components[1]];
+    self.viewPropsMenu.tgtBGColor_B_.text = [NSString stringWithFormat:@"%f", components[2]];
+    self.viewPropsMenu.tgtBGColor_A_.text = [NSString stringWithFormat:@"%f", CGColorGetAlpha(self.editObject.backgroundColor.CGColor)];
+    
+    // label_1
+    if(self.editObject.label_1){
+        self.viewPropsMenu.tgtLabel_1_.text = self.editObject.label_1.text;
+    }
+    else{
+        self.viewPropsMenu.tgtLabel_1_.text = @"-no-label-";
+    }
+}
+
+- (IBAction)doneEditing:(id)sender
+{
+    self.editLabelView.hidden = YES;
+    self.isEditing = NO;
+    
+    [self updateEditedPropsForView:self.editObject];
+    
+    if (self.dragObject) {
+        [self hideBorder:self.dragObject];
+        self.dragObject = nil;
+    }
+    self.editObject = nil;
+}
+
+- (void)updateEditedPropsForView:(id)sender;
+{
+    if (sender == nil) {
+        NSLog(@"ERROR: Trying to updateEditedProps for nil editObject! Bailing");
+        return;
+    }
+  // TODO: update the edit view with changes made via menu
+    // TODO: farther out: save states in plists for each view for later revisiting
+}
+
+
+- (void)saveEditedViewWithChanges:(NSMutableDictionary*)changes
+{
+    
+}
+
+- (IBAction)resetToDefault:(id)sender
+{
+    // TODO: set this to take tag & set that view back to default state
+}
+
+- (IBAction)showInfoDeets:(id)sender
+{
+    // TODO: this could eventually pull up a panel of info steps about how to use the app
+
+    //for now, it will just throw test images and stuff
+    if(!self.bgImageView.image){
+        UIImage* tempBg = [UIImage imageNamed:@"selfie_bg.png"];
+        self.bgImageView.image = tempBg;
+    }
+    else{
+        self.bgImageView.image = nil;
+    }
+    [self.bgImageView reloadInputViews];
+    
+    [self hideControls:sender];
+    
+}
+
 
 
 #pragma mark -FX-
@@ -220,6 +247,39 @@
         [UIView commitAnimations];
         
     }
+}
+
+// Can use this for most show/hide behavior
+- (IBAction)showHideView:(id)sender
+{
+    BOOL show = NO;
+    /**using tags to show/hide views. Any buttons tag +100 = the View's tag it shows/hides **/
+    UIView *sendingView = (UIView*)sender;
+    
+    if ([sender isKindOfClass:[UISwitch class] ]) {
+        UIView *tgtView = [self.view viewWithTag:sendingView.tag+100];
+        UISwitch *sw = (UISwitch*)sender;
+        show = sw.on;
+        
+        if (show) {
+            tgtView.hidden = NO;
+        }
+        else{
+            tgtView.hidden = YES;
+        }
+#ifdef DEBUG
+        NSLog(@"Showing/Hiding view tagged: %i which is a %@",sendingView.tag, [tgtView class]);
+#endif
+    }
+    else{
+        sendingView.hidden = !sendingView.hidden;
+        
+        // TODO: can do alpha fades here instead of snap hide
+#ifdef DEBUG
+        NSLog(@"Showing/Hiding view tagged: %i which is a %@",sendingView.tag, [sendingView class]);
+#endif
+    }
+    
 }
 
 #pragma mark -Touch Actions-

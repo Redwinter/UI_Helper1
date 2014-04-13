@@ -13,6 +13,7 @@
 @property (nonatomic) BOOL isDragging;
 @property (nonatomic) BOOL canDrag;
 @property (nonatomic) IBOutlet UIImageView *backgroundImage;
+@property (nonatomic) IBOutlet UILabel *label_1;
 
 
 
