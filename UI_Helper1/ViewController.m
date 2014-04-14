@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #define BACKGROUND_TAG 333
+#define DEGREES_TO_RADIANS(x) (M_PI * (x) / 180.0)
 
 @interface ViewController ()
 
@@ -33,7 +34,7 @@
 - (IBAction)showControls:(id)sender
 {
     // hide control on touchup (if not editing & not hid)
-    [self.view bringSubviewToFront:self.controlsView];
+    //[self.view bringSubviewToFront:self.controlsView];
     if (self.controlsView.alpha < 1.0f) {
         CGFloat alphaTime = 1-self.controlsView.alpha;
         [UIView beginAnimations:nil context:nil];
@@ -77,28 +78,11 @@
     // NOTE: temp on button trigger. remove and have AFTER a view touched & moved
     // & have button enable dragging views around and pos
     if(self.viewPropsMenu.hidden)self.viewPropsMenu.hidden = NO;
-    [self.view bringSubviewToFront:self.viewPropsMenu];
+    //[self.view bringSubviewToFront:self.viewPropsMenu];
     self.editObject = self.dragObject;
     
     [self loadPropsForView:self.editObject];// note: no need to pass var here yet
     
-    [self hideControls:sender];
-}
-
-- (IBAction)dismissViewPropsMenu:(id)sender
-{
-  // TODO: apply (& save paid) props for edited view
-    // set all the values for the new edits if they have changed
-    // apply & updateConstraints
-    
-    
-    self.viewPropsMenu.hidden = YES;
-    
-    [self hideBorder:self.dragObject];
-#ifdef DEBUG
-    NSLog(@"Dismissing View Props for View %@", self.editObject);
-#endif
-    self.editObject = nil;
     [self hideControls:sender];
 }
 
@@ -107,7 +91,7 @@
 {
     self.isEditing = YES;
     self.editLabelView.hidden = NO;
-    [self.view bringSubviewToFront:self.editLabelView];
+    //[self.view bringSubviewToFront:self.editLabelView];
     [self hideControls:sender];
 }
 
@@ -121,19 +105,19 @@
     // TODO: can actually load in from saved plists later, for now just fill with what's shown
     
     // size
-    self.viewPropsMenu.tgtWidth_.text = [NSString stringWithFormat:@"%f", self.editObject.frame.size.width];
-    self.viewPropsMenu.tgtHeight_.text = [NSString stringWithFormat:@"%f", self.editObject.frame.size.height];
+    self.viewPropsMenu.tgtWidth_.text = [NSString stringWithFormat:@"%.1f", self.editObject.frame.size.width];
+    self.viewPropsMenu.tgtHeight_.text = [NSString stringWithFormat:@"%.1f", self.editObject.frame.size.height];
     
     
     // position (NOTE: THESE ARE FROM ORIGIN) // TODO: add option to convert to center pos
-    self.viewPropsMenu.tgtX_.text = [NSString stringWithFormat:@"%f", self.editObject.frame.origin.x];
-    self.viewPropsMenu.tgtY_.text = [NSString stringWithFormat:@"%f", self.editObject.frame.origin.y];
-    self.viewPropsMenu.tgtZ_.text = [NSString stringWithFormat:@"%f", self.editObject.layer.zPosition];
+    self.viewPropsMenu.tgtX_.text = [NSString stringWithFormat:@"%.1f", self.editObject.frame.origin.x];
+    self.viewPropsMenu.tgtY_.text = [NSString stringWithFormat:@"%.1f", self.editObject.frame.origin.y];
+    self.viewPropsMenu.tgtZ_.text = [NSString stringWithFormat:@"%.1f", self.editObject.layer.zPosition];
     
     // rotation
     CGFloat radians = atan2f(self.editObject.transform.b, self.editObject.transform.a);
     CGFloat degreesRot = radians * (180 / M_PI);
-    self.viewPropsMenu.tgtRot_.text = [NSString stringWithFormat:@"%f", degreesRot];
+    self.viewPropsMenu.tgtRot_.text = [NSString stringWithFormat:@"%.2f", degreesRot];
     
     //TODO: skew
     //    CGFloat radians = atan2f(self.editObject.transform.b, self.editObject.transform.a);
@@ -142,10 +126,10 @@
     
     //BgColor
     const CGFloat* components = CGColorGetComponents(self.editObject.backgroundColor.CGColor);
-    self.viewPropsMenu.tgtBGColor_R_.text =[NSString stringWithFormat:@"%f", components[0]];
-    self.viewPropsMenu.tgtBGColor_G_.text = [NSString stringWithFormat:@"%f", components[1]];
-    self.viewPropsMenu.tgtBGColor_B_.text = [NSString stringWithFormat:@"%f", components[2]];
-    self.viewPropsMenu.tgtBGColor_A_.text = [NSString stringWithFormat:@"%f", CGColorGetAlpha(self.editObject.backgroundColor.CGColor)];
+    self.viewPropsMenu.tgtBGColor_R_.text =[NSString stringWithFormat:@"%.2f", components[0]];
+    self.viewPropsMenu.tgtBGColor_G_.text = [NSString stringWithFormat:@"%.2f", components[1]];
+    self.viewPropsMenu.tgtBGColor_B_.text = [NSString stringWithFormat:@"%.2f", components[2]];
+    self.viewPropsMenu.tgtBGColor_A_.text = [NSString stringWithFormat:@"%.2f", CGColorGetAlpha(self.editObject.backgroundColor.CGColor)];
     
     // label_1
     if(self.editObject.label_1){
@@ -156,18 +140,24 @@
     }
 }
 
-- (IBAction)doneEditing:(id)sender
+- (IBAction)dismissViewPropsMenu:(id)sender
 {
-    self.editLabelView.hidden = YES;
-    self.isEditing = NO;
+    // TODO: apply (& save paid) props for edited view
+    // set all the values for the new edits if they have changed
+    // apply & updateConstraints
     
-    [self updateEditedPropsForView:self.editObject];
     
-    if (self.dragObject) {
-        [self hideBorder:self.dragObject];
-        self.dragObject = nil;
-    }
+    self.viewPropsMenu.hidden = YES;
+    
+    [self hideBorder:self.dragObject];
+#ifdef DEBUG
+    NSLog(@"Dismissing View Props for View %@", self.editObject);
+#endif
+    [self updateEditedPropsForView:self.dragObject];
+    
     self.editObject = nil;
+    [self hideControls:sender];
+    
 }
 
 - (void)updateEditedPropsForView:(id)sender;
@@ -176,6 +166,55 @@
         NSLog(@"ERROR: Trying to updateEditedProps for nil editObject! Bailing");
         return;
     }
+    
+    // size & position
+    CGFloat newWidth = [self.viewPropsMenu.tgtWidth_.text floatValue];
+    CGFloat newHeight = [self.viewPropsMenu.tgtHeight_.text floatValue];
+    CGFloat newX = [self.viewPropsMenu.tgtX_.text floatValue];
+    CGFloat newY = [self.viewPropsMenu.tgtY_.text floatValue];
+    
+   
+    if (newHeight != self.dragObject.frame.size.height || newWidth != self.dragObject.frame.size.width) {
+
+        // set new size after rotation mess check
+        if ([self.viewPropsMenu.tgtRot_.text floatValue] == 0.0){
+            self.dragObject.frame = CGRectMake(newX, newY, newWidth, newHeight);
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"View Resized" message:@"Resetting Rotation to 0 to prevent frame errors. Must edit rotation and size sep. for this version." delegate:self cancelButtonTitle:@"Continue" otherButtonTitles:nil];
+            [alert show];
+            
+            self.dragObject.transform =  CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(0.0));
+            self.dragObject.frame = CGRectMake(newX, newY, newWidth, newHeight);
+        }
+
+    }
+    else {
+         // rotation
+        CGFloat newRotDeg = [self.viewPropsMenu.tgtRot_.text floatValue];
+        self.dragObject.transform =  CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(newRotDeg));
+    }
+    
+    CGFloat newZ = [self.viewPropsMenu.tgtZ_.text floatValue];
+    self.dragObject.layer.zPosition = newZ;
+    
+    
+    // TODO: skew
+    
+    // BG colors
+    CGFloat RColor = [self.viewPropsMenu.tgtBGColor_R_.text floatValue];
+    CGFloat GColor = [self.viewPropsMenu.tgtBGColor_G_.text floatValue];
+    CGFloat BColor = [self.viewPropsMenu.tgtBGColor_B_.text floatValue];
+    CGFloat Alpha = [self.viewPropsMenu.tgtBGColor_A_.text floatValue];
+    self.dragObject.backgroundColor = [UIColor colorWithRed:RColor green:GColor blue:BColor alpha:Alpha];
+    
+    //labels
+    self.dragObject.label_1.text = self.viewPropsMenu.tgtLabel_1_.text;
+
+    // TODO: check this
+    [self.view updateConstraints];
+    //[self.view layoutSubviews];
+    
   // TODO: update the edit view with changes made via menu
     // TODO: farther out: save states in plists for each view for later revisiting
 }
@@ -191,6 +230,19 @@
     // TODO: set this to take tag & set that view back to default state
 }
 
+- (IBAction)doneEditing:(id)sender
+{
+    self.editLabelView.hidden = YES;
+    self.isEditing = NO;
+    
+    if (self.dragObject) {
+        [self hideBorder:self.dragObject];
+        self.dragObject = nil;
+    }
+    self.editObject = nil;
+}
+
+// TODO: rewire this to set a BG screen image in labeling too
 - (IBAction)showInfoDeets:(id)sender
 {
     // TODO: this could eventually pull up a panel of info steps about how to use the app
@@ -335,11 +387,14 @@
 {
     if (self.isEditing) {
         CGPoint touchPoint = [[touches anyObject] locationInView:self.view];
-        CGRect newDragObjectFrame = CGRectMake(touchPoint.x - touchOffset.x,
-                                               touchPoint.y - touchOffset.y,
-                                               self.dragObject.frame.size.width,
-                                               self.dragObject.frame.size.height);
-        self.dragObject.frame = newDragObjectFrame;
+//        CGRect newDragObjectFrame = CGRectMake(touchPoint.x - touchOffset.x,
+//                                               touchPoint.y - touchOffset.y,
+//                                               self.dragObject.frame.size.width,
+//                                               self.dragObject.frame.size.height);
+//        self.dragObject.frame = newDragObjectFrame;
+        CGPoint newDragCenter = CGPointMake(touchPoint.x, touchPoint.y);
+        self.dragObject.center = newDragCenter;
+        
     }
     
 }
