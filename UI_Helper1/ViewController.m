@@ -320,7 +320,7 @@
             tgtView.hidden = YES;
         }
 #ifdef DEBUG
-        NSLog(@"Showing/Hiding view tagged: %i which is a %@",sendingView.tag, [tgtView class]);
+        NSLog(@"Showing/Hiding view tagged: %li which is a %@",sendingView.tag, [tgtView class]);
 #endif
     }
     else{
@@ -328,7 +328,7 @@
         
         // TODO: can do alpha fades here instead of snap hide
 #ifdef DEBUG
-        NSLog(@"Showing/Hiding view tagged: %i which is a %@",sendingView.tag, [sendingView class]);
+        NSLog(@"Showing/Hiding view tagged: %li which is a %@",(long)sendingView.tag, [sendingView class]);
 #endif
     }
     
@@ -369,7 +369,6 @@
                                                    touchPoint.y - iView.frame.origin.y);
                     self.homePosition = CGPointMake(iView.frame.origin.x,
                                                     iView.frame.origin.y);
-                    //[self.view bringSubviewToFront:self.dragObject]; // TODO: z-pos after neeeds to effect?
                     
                     // highlight selected object
                     [self showBorder:self.dragObject];
@@ -387,11 +386,6 @@
 {
     if (self.isEditing) {
         CGPoint touchPoint = [[touches anyObject] locationInView:self.view];
-//        CGRect newDragObjectFrame = CGRectMake(touchPoint.x - touchOffset.x,
-//                                               touchPoint.y - touchOffset.y,
-//                                               self.dragObject.frame.size.width,
-//                                               self.dragObject.frame.size.height);
-//        self.dragObject.frame = newDragObjectFrame;
         CGPoint newDragCenter = CGPointMake(touchPoint.x, touchPoint.y);
         self.dragObject.center = newDragCenter;
         
@@ -407,24 +401,6 @@
          if (self.viewPropsMenu.hidden && self.dragObject) {
              [self showViewPropsMenu:self.dragObject];
          }
-         
-         // TODO: test if its the BG via tag & show an option to change its image
-         
- // TODO: remove. f's up drop
-//        if (touchPoint.x > self.dropTarget.frame.origin.x &&
-//            touchPoint.x < self.dropTarget.frame.origin.x + self.dropTarget.frame.size.width &&
-//            touchPoint.y > self.dropTarget.frame.origin.y &&
-//            touchPoint.y < self.dropTarget.frame.origin.y + self.dropTarget.frame.size.height )
-//        {
-//            self.dropTarget.backgroundColor = self.dragObject.backgroundColor;
-//            
-//        }
-         
-         //FIXME: drop it in its new position (can use homePosition X & y if we want to lock it somewhere)
-         
-         
-        
-         
          
      }
     
@@ -496,6 +472,8 @@
     if(self.editObject)self.editObject.backgroundImage.image = nil;
     
 }
+
+
 
 #pragma mark -Picker Delegate Methods-
 

@@ -908,7 +908,7 @@
                                             <constraint firstItem="DD7-Uh-Azz" firstAttribute="top" secondItem="OBx-2y-xx8" secondAttribute="top" constant="20" symbolic="YES" id="mBH-Z6-mIW"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="huu-td-pBS" userLabel="Position Cell">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="huu-td-pBS" userLabel="Position Cell">
                                         <rect key="frame" x="20" y="118" width="331" height="71"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
