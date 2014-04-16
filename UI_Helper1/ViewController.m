@@ -240,23 +240,18 @@
     //labels
     self.dragObject.label_1.text = self.viewPropsMenu.tgtLabel_1_.text;
 
-    // TODO: check this
+    // TODO: check this constraint stuff...may be needed
+    for (DraggableView *dv in self.view.subviews) {
+        [dv updateConstraints];
+    }
     [self.view updateConstraints];
-    //[self.view layoutSubviews];
-    
-  // TODO: update the edit view with changes made via menu
-    // TODO: farther out: save states in plists for each view for later revisiting
 }
 
 
-- (void)saveEditedViewWithChanges:(NSMutableDictionary*)changes
-{
-    
-}
 
 - (IBAction)resetToDefault:(id)sender
 {
-    // TODO: set this to take tag & set that view back to default state
+    // TODO: set this to take tag & set that view back to default state (will need a plist of them)
 }
 
 - (IBAction)doneEditing:(id)sender
@@ -291,6 +286,13 @@
     
     [self hideControls:sender];
     
+}
+
+#pragma mark -Saving & Exporting-
+
+- (void)saveEditedViewWithChanges:(NSMutableDictionary*)changes
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:1234 forKey:@"foo"];
 }
 
 
@@ -513,6 +515,29 @@
     
     return roundedImage;
 }
+
+#pragma mark -Coordinates-
+
+- (IBAction)flipCenterOrigin:(UIButton*)sender
+{
+    NSString *title = [sender titleForState:UIControlStateNormal];
+    if ([title isEqualToString:@"Origin"]) {
+        // switch to Center point
+        self.viewPropsMenu.tgtX_.text = [NSString stringWithFormat:@"%.2f", self.dragObject.center.x];
+        self.viewPropsMenu.tgtY_.text = [NSString stringWithFormat:@"%.2f", self.dragObject.center.y];
+
+        [sender setTitle:@"Center" forState:UIControlStateNormal];
+    }
+    else if ([title isEqualToString:@"Center"]){
+        //switch to Origin points
+        self.viewPropsMenu.tgtX_.text = [NSString stringWithFormat:@"%.1f", self.dragObject.frame.origin.x];
+        self.viewPropsMenu.tgtY_.text = [NSString stringWithFormat:@"%.1f", self.dragObject.frame.origin.y];
+        self.viewPropsMenu.tgtZ_.text = [NSString stringWithFormat:@"%.1f", self.dragObject.layer.zPosition];
+        
+        [sender setTitle:@"Origin" forState:UIControlStateNormal];
+    }
+}
+
 
 
 #pragma mark -Touch Actions-

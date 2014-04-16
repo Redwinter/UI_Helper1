@@ -29,13 +29,11 @@
 @property (strong, nonatomic) IBOutlet UIView *editVisMenu;
 @property (strong, nonatomic) IBOutlet FXMenuView *viewFXMenu;
 
-
 @property (strong, nonatomic) IBOutlet UIImageView *bgImageView;
 @property (strong,nonatomic) IBOutlet UIPickerView *filterPicker;
 @property (strong) UIPopoverController *popoverImageViewController;
 @property (strong,nonatomic) IBOutlet UIView *controlsView;
 @property (strong, nonatomic) IBOutlet UIView *editLabelView;
-
 
 // buttons for triggering touch up after drag w custom touches
 @property (strong)IBOutlet UIButton *viewVisButton;
@@ -50,6 +48,8 @@
 
 - (IBAction)pickImage:(id)sender;
 - (IBAction)clearBGImage:(id)sender;
+
+- (IBAction)flipCenterOrigin:(UIButton*)sender;
 
 - (IBAction)showVisEditMenu:(id)sender;
 
