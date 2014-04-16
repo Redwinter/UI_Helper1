@@ -53,7 +53,7 @@
                                 <rect key="frame" x="0.0" y="567" width="256" height="100"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Llf-Lr-AOm" userLabel="HUD_Left_BG">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Llf-Lr-AOm" userLabel="HUD_Left_BG">
                                         <rect key="frame" x="0.0" y="0.0" width="256" height="100"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
@@ -183,11 +183,11 @@
                                     <outlet property="label_1" destination="6W8-q5-fIr" id="hir-25-Czt"/>
                                 </connections>
                             </view>
-                            <view hidden="YES" tag="112" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6i8-ha-WTs" userLabel="Top_Menu_Cont_112" customClass="DraggableView">
+                            <view hidden="YES" tag="112" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6i8-ha-WTs" userLabel="Top_Menu_Cont_112" customClass="DraggableView">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="100"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BSa-YM-iqw" userLabel="TopMenu_BG">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BSa-YM-iqw" userLabel="TopMenu_BG">
                                         <rect key="frame" x="0.0" y="0.0" width="1024" height="100"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
@@ -216,15 +216,15 @@
                                     <outlet property="label_1" destination="FFW-dd-wuq" id="BZP-bN-iEt"/>
                                 </connections>
                             </view>
-                            <view hidden="YES" tag="113" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k2j-oD-wd5" userLabel="Big_Label_Cont_113" customClass="DraggableView">
+                            <view hidden="YES" tag="113" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2j-oD-wd5" userLabel="Big_Label_Cont_113" customClass="DraggableView">
                                 <rect key="frame" x="-1" y="0.0" width="290" height="100"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d4o-06-Rhz" userLabel="BLC_1_BG">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d4o-06-Rhz" userLabel="BLC_1_BG">
                                         <rect key="frame" x="0.0" y="-1" width="290" height="100"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="10:24" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpe-hw-yV8" userLabel="Big_Label">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:24" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpe-hw-yV8" userLabel="Big_Label">
                                         <rect key="frame" x="0.0" y="-16" width="290" height="130"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="86"/>
@@ -543,7 +543,7 @@
                                     <constraint firstAttribute="bottom" secondItem="Nq1-m4-KPr" secondAttribute="bottom" constant="20" symbolic="YES" id="lXI-Ne-UDU"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" tag="102" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ESl-Fw-lgQ" userLabel="View FX Menu_set switch tags on load">
+                            <view hidden="YES" tag="102" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ESl-Fw-lgQ" userLabel="View FX Menu_set switch tags on load" customClass="FXMenuView">
                                 <rect key="frame" x="20" y="134" width="360" height="398"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -614,6 +614,11 @@
                                     <constraint firstItem="qat-fz-1tn" firstAttribute="trailing" secondItem="U41-CY-bq6" secondAttribute="trailing" id="pxR-Lk-kuo"/>
                                     <constraint firstItem="xlQ-Xv-Erx" firstAttribute="top" secondItem="2Tx-pQ-QD7" secondAttribute="bottom" constant="17" id="qHO-y1-1yA"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="rounderSwitch" destination="U41-CY-bq6" id="qme-Zw-pVi"/>
+                                    <outlet property="shadowSwitch" destination="FkL-4B-FoA" id="ceJ-nm-89R"/>
+                                    <outlet property="slideSwitch" destination="qat-fz-1tn" id="pVd-yq-r64"/>
+                                </connections>
                             </view>
                             <view hidden="YES" tag="102" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="acZ-8b-oqc" userLabel="Vis Edits Menu_102">
                                 <rect key="frame" x="20" y="134" width="360" height="398"/>
@@ -1418,13 +1423,10 @@
                         <outlet property="editButton" destination="lgz-qn-CMN" id="hUM-yS-Sqp"/>
                         <outlet property="editLabelView" destination="BLy-oK-Oeu" id="tuQ-9D-jOa"/>
                         <outlet property="editVisMenu" destination="acZ-8b-oqc" id="58f-nN-05u"/>
-                        <outlet property="rounderSwitch" destination="U41-CY-bq6" id="KBO-4l-j4k"/>
-                        <outlet property="shadowSwitch" destination="FkL-4B-FoA" id="Gyo-9J-qrY"/>
                         <outlet property="slideDownButton" destination="kVY-PP-9Of" id="T6z-XA-HKR"/>
-                        <outlet property="slideSwitch" destination="qat-fz-1tn" id="Dht-B2-7bE"/>
                         <outlet property="slideUpButton" destination="6Li-ki-7Ea" id="eCG-Ml-8op"/>
                         <outlet property="testButton" destination="K5T-20-Xg1" id="nbQ-Pf-WUu"/>
-                        <outlet property="viewFXMenu" destination="ESl-Fw-lgQ" id="D1g-ep-wYS"/>
+                        <outlet property="viewFXMenu" destination="ESl-Fw-lgQ" id="SHf-3e-8B6"/>
                         <outlet property="viewPropsMenu" destination="yg1-ed-kGw" id="N8F-NR-k4L"/>
                         <outlet property="viewVisButton" destination="lgz-qn-CMN" id="AbI-gV-6bv"/>
                     </connections>

@@ -11,6 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "DraggableView.h"
 #import "PropsMenuView.h"
+#import "FXMenuView.h"
 
 @interface ViewController : UIViewController<UIImagePickerControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate,UIPopoverControllerDelegate>
 
@@ -26,11 +27,8 @@
 @property (strong,nonatomic) CIContext *context;
 @property (strong, nonatomic) IBOutlet PropsMenuView *viewPropsMenu; 
 @property (strong, nonatomic) IBOutlet UIView *editVisMenu;
+@property (strong, nonatomic) IBOutlet FXMenuView *viewFXMenu;
 
-@property (strong, nonatomic) IBOutlet UIView *viewFXMenu;
-@property (strong, nonatomic) IBOutlet UISwitch *shadowSwitch;
-@property (strong, nonatomic) IBOutlet UISwitch *rounderSwitch;
-@property (strong, nonatomic) IBOutlet UISwitch *slideSwitch;
 
 @property (strong, nonatomic) IBOutlet UIImageView *bgImageView;
 @property (strong,nonatomic) IBOutlet UIPickerView *filterPicker;

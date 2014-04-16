@@ -9,30 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "UI_Helper1/ViewController.m"
-            timestampString = "419301237.265031"
+            filePath = "UI_Helper1/PropsMenuView.h"
+            timestampString = "419302360.280302"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "423"
-            endingLineNumber = "423"
-            landmarkName = "-tapSlideDownUI:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UI_Helper1/ViewController.m"
-            timestampString = "419301237.265031"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "394"
-            endingLineNumber = "394"
-            landmarkName = "-tapSlideUpUI:"
-            landmarkType = "5">
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "@interface PropsMenuView"
+            landmarkType = "2">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

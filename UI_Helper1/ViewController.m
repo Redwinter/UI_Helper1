@@ -16,7 +16,7 @@
 
 @implementation ViewController
 
-@synthesize isEditing, touchOffset, dragObject, homePosition, dropTarget, editButton, viewVisButton, testButton, currentViewEdits, slideDownButton,slideUpButton,viewFXMenu, shadowSwitch, rounderSwitch, slideSwitch;
+@synthesize isEditing, touchOffset, dragObject, homePosition, dropTarget, editButton, viewVisButton, testButton, currentViewEdits, slideDownButton,slideUpButton, viewFXMenu;
 
 - (void)viewDidLoad
 {
@@ -100,10 +100,15 @@
         // a rough way to sync switches to corresp views but reuse menu via tagging
         sw.tag = sender.tag -100;
 #ifdef DEBUG
-        NSLog(@"FX menu: Tagging switch: %li to work with %li",(long)sw.tag,(long)sender.tag );
+        //NSLog(@"FX menu: Tagging switch: %li to work with %li",(long)sw.tag,(long)sender.tag );
 #endif
     }
-//    self.viewFXMenu.center = CGPointMake(self.viewPropsMenu.center.x+self.viewFXMenu.frame.size.width/2+20, self.viewPropsMenu.center.y);
+    
+    // preload switch states from selected obj
+    self.viewFXMenu.shadowSwitch.on = self.dragObject.isShadowed;
+    self.viewFXMenu.rounderSwitch.on= self.dragObject.isRounded;
+    self.viewFXMenu.slideSwitch.on = self.dragObject.slidesUpDown;
+    
     self.viewFXMenu.hidden = !self.viewFXMenu.hidden;
 }
 
@@ -364,21 +369,15 @@
 -(IBAction)setSlideUpDownUI:(id)sender{
     UISwitch *sendingSwitch = (UISwitch*)sender;
     UIView *tgtView;
-    BOOL isBottom = NO;
     if ([sender isKindOfClass:[UISwitch class]]) {
        
         tgtView = [self.view viewWithTag:sendingSwitch.tag+100];
     }
     
-    //crude setters for temp
-    if(tgtView.tag == 111){
-        isBottom = YES;
-    }
-    
-    if (isBottom) {
+    if (tgtView.tag == 111) {
         self.slideDownButton.enabled = sendingSwitch.on;
     }
-    else{
+    else if(tgtView.tag ==112){
         self.slideUpButton.enabled = sendingSwitch.on;
     }
     
