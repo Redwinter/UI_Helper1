@@ -26,16 +26,27 @@
 @property (strong,nonatomic) CIContext *context;
 @property (strong, nonatomic) IBOutlet PropsMenuView *viewPropsMenu; 
 @property (strong, nonatomic) IBOutlet UIView *editVisMenu;
+
+@property (strong, nonatomic) IBOutlet UIView *viewFXMenu;
+@property (strong, nonatomic) IBOutlet UISwitch *shadowSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *rounderSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *slideSwitch;
+
 @property (strong, nonatomic) IBOutlet UIImageView *bgImageView;
 @property (strong,nonatomic) IBOutlet UIPickerView *filterPicker;
 @property (strong) UIPopoverController *popoverImageViewController;
 @property (strong,nonatomic) IBOutlet UIView *controlsView;
 @property (strong, nonatomic) IBOutlet UIView *editLabelView;
 
+
 // buttons for triggering touch up after drag w custom touches
 @property (strong)IBOutlet UIButton *viewVisButton;
 @property (strong)IBOutlet UIButton *editButton;
 @property (strong)IBOutlet UIButton *testButton;
+
+// buttons in zones for sliding up and down menus from top or bottom. TODO: use touch zones instead?
+@property (strong)IBOutlet UIButton *slideUpButton;
+@property (strong)IBOutlet UIButton *slideDownButton;
 
 @property (strong)IBOutlet NSMutableDictionary *currentViewEdits;
 
@@ -47,6 +58,10 @@
 - (IBAction)showViewPropsMenu:(id)sender;
 - (IBAction)dismissViewPropsMenu:(id)sender;
 - (IBAction)resetToDefault:(id)sender;
+- (IBAction)tapSlideUpUI:(id)sender;
+- (IBAction)tapSlideDownUI:(id)sender;
+- (IBAction)toggleCorners:(id)sender rounded:(BOOL)round;
+- (IBAction)toggleShadow:(id)sender show:(BOOL)show;
 
 - (IBAction)showHideView:(id)sender;
 - (IBAction)enableViewEdits:(id)sender;

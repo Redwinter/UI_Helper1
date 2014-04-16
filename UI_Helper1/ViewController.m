@@ -16,7 +16,7 @@
 
 @implementation ViewController
 
-@synthesize isEditing, touchOffset, dragObject, homePosition, dropTarget, editButton, viewVisButton, testButton, currentViewEdits;
+@synthesize isEditing, touchOffset, dragObject, homePosition, dropTarget, editButton, viewVisButton, testButton, currentViewEdits, slideDownButton,slideUpButton,viewFXMenu, shadowSwitch, rounderSwitch, slideSwitch;
 
 - (void)viewDidLoad
 {
@@ -83,9 +83,29 @@
     
     [self loadPropsForView:self.editObject];// note: no need to pass var here yet
     
+    // set this for views that we want to show addtl edit props for
+    if (YES)
+    {
+        [self showFXEditMenu:self.dragObject];
+    }
+    
     [self hideControls:sender];
 }
 
+// currently this flips it back n forth between hide/show for speed
+- (void)showFXEditMenu:(DraggableView*)sender
+{
+    //TODO: link switches for auto set on load. now is tag on menu with some extra features for each view
+    for (UISwitch*sw in self.viewFXMenu.subviews) {
+        // a rough way to sync switches to corresp views but reuse menu via tagging
+        sw.tag = sender.tag -100;
+#ifdef DEBUG
+        NSLog(@"FX menu: Tagging switch: %li to work with %li",(long)sw.tag,(long)sender.tag );
+#endif
+    }
+//    self.viewFXMenu.center = CGPointMake(self.viewPropsMenu.center.x+self.viewFXMenu.frame.size.width/2+20, self.viewPropsMenu.center.y);
+    self.viewFXMenu.hidden = !self.viewFXMenu.hidden;
+}
 
 - (IBAction)enableViewEdits:(id)sender
 {
@@ -93,6 +113,9 @@
     self.editLabelView.hidden = NO;
     //[self.view bringSubviewToFront:self.editLabelView];
     [self hideControls:sender];
+    
+    self.slideDownButton.hidden = YES;
+    self.slideUpButton.hidden = YES;
 }
 
 - (void)loadPropsForView:(id)sender;
@@ -156,6 +179,7 @@
     [self updateEditedPropsForView:self.dragObject];
     
     self.editObject = nil;
+    self.viewFXMenu.hidden = YES;
     [self hideControls:sender];
     
 }
@@ -240,6 +264,9 @@
         self.dragObject = nil;
     }
     self.editObject = nil;
+    
+    self.slideDownButton.hidden = NO;
+    self.slideUpButton.hidden = NO;
 }
 
 // TODO: rewire this to set a BG screen image in labeling too
@@ -320,7 +347,7 @@
             tgtView.hidden = YES;
         }
 #ifdef DEBUG
-        NSLog(@"Showing/Hiding view tagged: %li which is a %@",sendingView.tag, [tgtView class]);
+        NSLog(@"Showing/Hiding view tagged: %li which is a %@",(long)sendingView.tag, [tgtView class]);
 #endif
     }
     else{
@@ -333,6 +360,161 @@
     }
     
 }
+
+-(IBAction)setSlideUpDownUI:(id)sender{
+    UISwitch *sendingSwitch = (UISwitch*)sender;
+    UIView *tgtView;
+    BOOL isBottom = NO;
+    if ([sender isKindOfClass:[UISwitch class]]) {
+       
+        tgtView = [self.view viewWithTag:sendingSwitch.tag+100];
+    }
+    
+    //crude setters for temp
+    if(tgtView.tag == 111){
+        isBottom = YES;
+    }
+    
+    if (isBottom) {
+        self.slideDownButton.enabled = sendingSwitch.on;
+    }
+    else{
+        self.slideUpButton.enabled = sendingSwitch.on;
+    }
+    
+    self.dragObject.slidesUpDown = sendingSwitch.on;
+    
+}
+
+-(IBAction)tapSlideUpUI:(id)sender
+{
+    // note: must use a distinct button + tag assoc draggable view in this case currently
+    // using tagging so the view it targets can be reconfigured that way
+    DraggableView *tgtView = (DraggableView*)[self.view viewWithTag:self.slideUpButton.tag+100];
+    float down = tgtView.bounds.size.height/2;
+    float curY = tgtView.center.y;
+    if (curY < down){
+        // slide down on
+        [UIView beginAnimations:@"slideDown" context:nil];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+        [UIView setAnimationDuration:0.25];
+        tgtView.center = CGPointMake(tgtView.center.x, tgtView.bounds.size.height/2);
+        [UIView commitAnimations];
+        
+    }
+    else{
+        //slide back up
+        [UIView beginAnimations:@"slideDown" context:nil];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+        [UIView setAnimationDuration:0.25];
+        tgtView.center = CGPointMake(tgtView.center.x, -1.0 * tgtView.bounds.size.height);
+        [UIView commitAnimations];
+    }
+    
+}
+
+-(IBAction)tapSlideDownUI:(id)sender
+{
+    // note: must use a distinct button + tag assoc draggable view in this case currently
+    // using tagging so the view it targets can be reconfigured that way
+    DraggableView *tgtView = (DraggableView*)[self.view viewWithTag:self.slideDownButton.tag+100];
+ 
+    //TODO:set for orientations messy here but.. button ctr is safe ref
+    float up = self.slideDownButton.center.y;
+    float curY = tgtView.center.y;
+    if (curY > up){
+        // its farther off screen than it should be, slide it back up
+        [UIView beginAnimations:@"slideDown" context:nil];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+        [UIView setAnimationDuration:0.25];
+        tgtView.center = CGPointMake(tgtView.center.x, up);
+        [UIView commitAnimations];
+        
+    }
+    else{
+        //slide down off
+        [UIView beginAnimations:@"slideDown" context:nil];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+        [UIView setAnimationDuration:0.25];
+        tgtView.center = CGPointMake(tgtView.center.x, up+tgtView.bounds.size.height);
+        [UIView commitAnimations];
+    }
+    
+}
+
+-(IBAction)toggleShadow:(id)sender show:(BOOL)show;
+{
+    UIView *tgtView;
+    
+    if ([sender isKindOfClass:[UISwitch class]]) {
+        UISwitch *sendingSwitch = (UISwitch*)sender;
+        tgtView = [self.view viewWithTag:sendingSwitch.tag+100];
+        UISwitch *sw = (UISwitch*)sender;
+        show = sw.on;
+    }
+    else{
+        tgtView = (UIView*)sender;
+    }
+    
+    if (show) {
+        [tgtView.layer setShadowColor:[UIColor blackColor].CGColor];
+        [tgtView.layer setShadowOpacity:0.8];
+        [tgtView.layer setShadowOffset:CGSizeMake(-2, -2)];
+    }
+    else{
+        [tgtView.layer setShadowOpacity:0.0];
+        [tgtView.layer setShadowOffset:CGSizeMake(0, 0)];
+    }
+    
+    self.dragObject.isShadowed = show;
+	
+}
+
+-(IBAction)toggleCorners:(id)sender rounded:(BOOL)round;
+{
+    UIView *tgtView;
+    
+    if ([sender isKindOfClass:[UISwitch class]]) {
+        UISwitch *sendingSwitch = (UISwitch*)sender;
+        tgtView = [self.view viewWithTag:sendingSwitch.tag+100];
+        UISwitch *sw = (UISwitch*)sender;
+        round = sw.on;
+    }
+    else{
+        tgtView = (UIView*)sender;
+    }
+
+    [tgtView.layer setMasksToBounds:YES];
+    if(round)
+    {
+        [tgtView.layer setCornerRadius:4.0];
+    }
+    else{
+        [tgtView.layer setCornerRadius:1.0];
+    }
+    
+     self.dragObject.isRounded = round;
+    
+}
+
+-(UIImage *)makeRoundedImage:(UIImage *) image
+                      radius: (float) radius;
+{
+    CALayer *imageLayer = [CALayer layer];
+    imageLayer.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    imageLayer.contents = (id) image.CGImage;
+    
+    imageLayer.masksToBounds = YES;
+    imageLayer.cornerRadius = radius;
+    
+    UIGraphicsBeginImageContext(image.size);
+    [imageLayer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *roundedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return roundedImage;
+}
+
 
 #pragma mark -Touch Actions-
 

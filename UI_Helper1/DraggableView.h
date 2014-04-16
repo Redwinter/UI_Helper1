@@ -12,6 +12,10 @@
 
 @property (nonatomic) BOOL isDragging;
 @property (nonatomic) BOOL canDrag;
+@property (nonatomic) BOOL isShadowed;
+@property (nonatomic) BOOL isRounded;
+@property (nonatomic) BOOL slidesUpDown;
+@property (nonatomic) BOOL canFX;
 @property (nonatomic) IBOutlet UIImageView *backgroundImage;
 @property (nonatomic) IBOutlet UILabel *label_1;
 
