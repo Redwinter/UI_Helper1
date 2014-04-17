@@ -12,6 +12,7 @@
 
 @property (nonatomic) BOOL shouldSave;
 @property (nonatomic) BOOL tgtViewLocked;
+@property (nonatomic) BOOL posIsCenter;
 @property (nonatomic, strong) IBOutlet UITextField *tgtWidth_;
 @property (nonatomic, strong) IBOutlet UITextField *tgtHeight_;
 @property (nonatomic, strong) IBOutlet UITextField *tgtX_;
@@ -24,6 +25,7 @@
 @property (nonatomic, strong) IBOutlet UITextField *tgtBGColor_B_;
 @property (nonatomic, strong) IBOutlet UITextField *tgtBGColor_A_;
 @property (nonatomic, strong) IBOutlet UITextField *tgtLabel_1_;
+
 
 
 @end

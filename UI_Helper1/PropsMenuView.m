@@ -10,7 +10,7 @@
 
 @implementation PropsMenuView
 
-@synthesize tgtViewLocked, tgtBGColor_B_,tgtBGColor_G_,tgtBGColor_R_,tgtHeight_,tgtLabel_1_,tgtRot_,tgtSkew_,tgtWidth_,tgtX_,tgtY_,tgtZ_,tgtBGColor_A_;
+@synthesize tgtViewLocked, tgtBGColor_B_,tgtBGColor_G_,tgtBGColor_R_,tgtHeight_,tgtLabel_1_,tgtRot_,tgtSkew_,tgtWidth_,tgtX_,tgtY_,tgtZ_,tgtBGColor_A_, posIsCenter;
 
 - (id)initWithFrame:(CGRect)frame
 {

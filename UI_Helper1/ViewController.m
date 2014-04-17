@@ -16,7 +16,7 @@
 
 @implementation ViewController
 
-@synthesize isEditing, touchOffset, dragObject, homePosition, dropTarget, editButton, viewVisButton, testButton, currentViewEdits, bottomBarSlideButton,topBarSlideButton, viewFXMenu;
+@synthesize isEditing, touchOffset, dragObject, homePosition, dropTarget, editButton, viewVisButton, testButton, currentViewEdits, bottomBarSlideButton,topBarSlideButton, viewFXMenu, activeTextField, viewPropsMenuHomePosition;
 
 - (void)viewDidLoad
 {
@@ -32,6 +32,55 @@
     // an array of dicts(plists)
     NSMutableDictionary *UIConfig = [NSMutableDictionary dictionary];
     [[NSUserDefaults standardUserDefaults] setObject:UIConfig forKey:@"UIConfig"];
+    
+    // listen for that keyboard
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+    
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
+    
+    self.viewPropsMenuHomePosition = CGPointMake(582, 384); // returns here after keyboard highjinks
+    
+}
+
+#pragma mark - Key notifs & Textfield delegate -
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.activeTextField = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    self.activeTextField = nil;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return NO;
+}
+
+- (void)keyboardWasShown:(NSNotification*)aNotif
+{
+    NSDictionary *info = [aNotif userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CGPoint bgCtr = self.viewPropsMenu.center;
+
+    CGPoint blrg = [self.activeTextField convertPoint:self.activeTextField.center toView:self.view];
+    
+    //TODO: for other view orients checking against width unintuitively, because landscape
+    NSLog(@"%@ is act txt ctr", NSStringFromCGPoint(self.activeTextField.center));
+    if (blrg.y > 400.0f) {
+        // push it up
+        bgCtr.y -= (kbSize.width/2 + activeTextField.center.y);
+        self.viewPropsMenu.center = bgCtr;
+    }
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotif
+{
+    // TODO: show is universal push up, this is specific bring down for speed
+      self.viewPropsMenu.center = self.viewPropsMenuHomePosition;
 }
 
 
@@ -938,11 +987,14 @@
 - (void)viewDidUnload
 {
     // TODO: more here if mem is issue
-    // FIXME: look here if crashed
+    // FIXME: look here if crashed & do more for mem
     self.editButton = nil;
     self.testButton = nil;
     self.viewVisButton = nil;
     self.currentViewEdits = nil;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
 }
 
 @end

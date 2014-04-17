@@ -14,7 +14,7 @@
 #import "PropsMenuView.h"
 #import "FXMenuView.h"
 
-@interface ViewController : UIViewController<UIImagePickerControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate,UIPopoverControllerDelegate, MFMailComposeViewControllerDelegate>
+@interface ViewController : UIViewController<UIImagePickerControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate,UIPopoverControllerDelegate, MFMailComposeViewControllerDelegate, UITextFieldDelegate>
 
 @property (nonatomic) BOOL isEditing;
 
@@ -24,6 +24,8 @@
 @property (nonatomic, strong) DraggableView *editObject; // indicates what is being edited
 @property (nonatomic, assign) CGPoint touchOffset;
 @property (nonatomic, assign) CGPoint homePosition;
+@property (nonatomic, assign) CGPoint viewPropsMenuHomePosition;
+@property (nonatomic, assign) UITextField *activeTextField;
 
 @property (strong,nonatomic) CIContext *context;
 @property (strong, nonatomic) IBOutlet PropsMenuView *viewPropsMenu; 
