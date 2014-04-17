@@ -382,7 +382,7 @@
             
         }
         else{
-            [props setObject:@"NO" forKey:@"slides"];
+            [props setObject:@"NO" forKey:@"slidesDown"];
         }
         
         // proper label &id
