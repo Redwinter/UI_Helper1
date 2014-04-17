@@ -16,7 +16,7 @@
 
 @implementation ViewController
 
-@synthesize isEditing, touchOffset, dragObject, homePosition, dropTarget, editButton, viewVisButton, testButton, currentViewEdits, slideDownButton,slideUpButton, viewFXMenu;
+@synthesize isEditing, touchOffset, dragObject, homePosition, dropTarget, editButton, viewVisButton, testButton, currentViewEdits, bottomBarSlideButton,topBarSlideButton, viewFXMenu;
 
 - (void)viewDidLoad
 {
@@ -27,6 +27,11 @@
     self.context = [CIContext contextWithOptions:nil];
     self.isEditing = NO;
     self.currentViewEdits = [NSMutableDictionary dictionary];
+    
+    // FIXME: this will load in a fresh UI_config save each time for test. In final make it so it can save multiples & remembers each of them
+    // an array of dicts(plists)
+    NSMutableDictionary *UIConfig = [NSMutableDictionary dictionary];
+    [[NSUserDefaults standardUserDefaults] setObject:UIConfig forKey:@"UIConfig"];
 }
 
 
@@ -107,7 +112,7 @@
     // preload switch states from selected obj
     self.viewFXMenu.shadowSwitch.on = self.dragObject.isShadowed;
     self.viewFXMenu.rounderSwitch.on= self.dragObject.isRounded;
-    self.viewFXMenu.slideSwitch.on = self.dragObject.slidesUpDown;
+    self.viewFXMenu.slideSwitch.on = self.dragObject.slidesUp||self.dragObject.slidesDown;
     
     self.viewFXMenu.hidden = !self.viewFXMenu.hidden;
 }
@@ -119,8 +124,8 @@
     //[self.view bringSubviewToFront:self.editLabelView];
     [self hideControls:sender];
     
-    self.slideDownButton.hidden = YES;
-    self.slideUpButton.hidden = YES;
+    self.bottomBarSlideButton.hidden = YES;
+    self.topBarSlideButton.hidden = YES;
 }
 
 - (void)loadPropsForView:(id)sender;
@@ -183,7 +188,7 @@
 #endif
     [self updateEditedPropsForView:self.dragObject];
     
-    self.editObject = nil;
+    self.editObject = nil; // TODO: excess and unneeded? Drag Obj handles
     self.viewFXMenu.hidden = YES;
     [self hideControls:sender];
     
@@ -265,8 +270,19 @@
     }
     self.editObject = nil;
     
-    self.slideDownButton.hidden = NO;
-    self.slideUpButton.hidden = NO;
+    self.bottomBarSlideButton.hidden = NO;
+    self.topBarSlideButton.hidden = NO;
+    
+    //Saving it here automatically
+    //self.view.userInteractionEnabled = NO; // FIXME: dangerous waters- idea is to prevent switching drag obj mid save
+    NSLog(@"Saving start");
+    for (DraggableView *tgtView in self.view.subviews) {
+        if ([tgtView isKindOfClass:[DraggableView class]] && !tgtView.hidden) {
+            NSLog(@"saving View tagged %li", (long)tgtView.tag);
+            [self performSelectorInBackground:@selector(saveViewProps:) withObject:tgtView];
+        }
+    }
+     NSLog(@"Saving done");
 }
 
 // TODO: rewire this to set a BG screen image in labeling too
@@ -290,10 +306,181 @@
 
 #pragma mark -Saving & Exporting-
 
-- (void)saveEditedViewWithChanges:(NSMutableDictionary*)changes
+-(IBAction)saveViewProps:(UIView*)tgtView
 {
-    [[NSUserDefaults standardUserDefaults] setInteger:1234 forKey:@"foo"];
+    if (!tgtView) {
+        NSLog(@"Save props called with nil object. Bailing");
+        return;
+    }
+    NSMutableDictionary* props = [NSMutableDictionary dictionaryWithCapacity:30];
+    
+    // position note: this will be center based for now
+    [props setObject:NSStringFromCGPoint(tgtView.center) forKey:@"centerPosition"];
+    [props setObject:[NSString stringWithFormat:@"%.1f", tgtView.layer.zPosition] forKey:@"zPosition"];
+    
+    // size
+    [props setObject: NSStringFromCGSize(tgtView.bounds.size) forKey:@"boundsSize"];
+    
+    // rotation
+    CGFloat radians = atan2f(tgtView.transform.b, tgtView.transform.a);
+    CGFloat degreesRot = radians * (180 / M_PI);
+    [props setObject:[NSString stringWithFormat:@"%.2f", degreesRot] forKey:@"rotation"];
+    
+    //TODO: skew setting
+    //[props setObject:[NSString stringWithFormat:@"%.2f", tgtView.transform] forKey:@"skew"];
+    
+
+    //BgColor
+    const CGFloat* components = CGColorGetComponents(tgtView.backgroundColor.CGColor);
+    [props setObject:[NSString stringWithFormat:@"%.2f", components[0]] forKey:@"bgR"];
+    [props setObject:[NSString stringWithFormat:@"%.2f", components[1]] forKey:@"bgG"];
+    [props setObject:[NSString stringWithFormat:@"%.2f", components[2]] forKey:@"bgB"];
+    [props setObject:[NSString stringWithFormat:@"%.2f", CGColorGetAlpha(self.editObject.backgroundColor.CGColor)] forKey:@"bgA"];
+    
+    // label & viewID default
+     NSString *viewID = [NSString stringWithFormat:@"%@_viewProps_%li", @"unknown_view", (long)tgtView.tag];
+    
+    if ([tgtView isKindOfClass:[DraggableView class]]) {
+        DraggableView *dv = (DraggableView*)tgtView;
+        
+        //TODO: BGImage (use filename so code can actually pull it in reader for export)??
+        NSLog(@"should be saving image %@?",dv.backgroundImage.image);
+  
+        
+        // FX
+        if (dv.isShadowed){
+            [props setObject:@"YES" forKey:@"shadowed"];
+            [props setObject:NSStringFromCGSize(dv.layer.shadowOffset) forKey:@"shadowOffset"];
+            [props setObject:[NSString stringWithFormat:@"%.2f", dv.layer.shadowOpacity] forKey:@"shadowOpacity"];
+        }
+        else{
+            [props setObject:@"NO" forKey:@"shadowed"];
+        }
+        if(dv.isRounded){
+            [props setObject:@"YES" forKey:@"rounded"];
+            [props setObject:[NSString stringWithFormat:@"%.2f", dv.layer.cornerRadius] forKey:@"cornerRadius"];
+        }
+        else
+        {
+            [props setObject:@"NO" forKey:@"rounded"];
+        }
+        if(dv.slidesUp){
+            [props setObject:@"YES" forKey:@"slidesUp"];
+ 
+        }
+        else{
+            [props setObject:@"NO" forKey:@"slidesUp"];
+            
+            // TODO: fix
+            //[props setObject:NSStringFromCGPoint(self.slideUpButton.center) forKey:@"slideToPoint"];
+        }
+        if(dv.slidesDown){
+            [props setObject:@"YES" forKey:@"slidesDown"];
+            
+            // TODO: fix
+            //[props setObject:NSStringFromCGPoint(self.slideUpButton.center) forKey:@"slideToPoint"];
+            
+        }
+        else{
+            [props setObject:@"NO" forKey:@"slides"];
+        }
+        
+        // proper label &id
+        if (dv.label_1 && dv.label_1.text) {
+            [props setObject:dv.label_1.text forKey:@"label_1"];
+            //NOTE: each view MUST have unique tag for this to work saving this view
+           viewID = [NSString stringWithFormat:@"%@_viewProps_%li", dv.label_1.text, (long)tgtView.tag];
+        }
+    }
+    
+
+    
+#ifdef DEBUG
+    NSLog(@"Saving View Props: %@",props);
+#endif
+    
+    NSLog(@"viewProps saved");
+    
+    [self updateSavedUIConfig:props forViewID:viewID];
+
 }
+
+- (void)updateSavedUIConfig:(NSMutableDictionary*)newViewProps forViewID:(NSString*)viewID
+{
+    // TODO: update this to use some format storage for multiple files (now just 1)
+    // adds a new view to the current (singular for now) UIConfig array
+    NSMutableDictionary *UIProps = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"UIConfig"]];
+    if (!UIProps) {
+        NSLog(@"ERROR: Could not find base UIProps array when saving! Bailing");
+        return;
+    }
+    
+#ifdef DEBUG
+    NSLog(@"Updating UIConfig file");
+#endif
+    
+    [UIProps setObject:newViewProps forKey:viewID];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:UIProps forKey:@"UIConfig"];
+#ifdef DEBUG
+    NSLog(@"Updated UIConfig file: %@", UIProps);
+#endif
+}
+
+
+#pragma mark -email/export-
+- (IBAction)emailEditedUIPlist
+{
+    //TODO: just here? BGImage (use filename so code can actually pull it in reader for export)
+    //TODO: pass in changes direct? Currently reading from saved
+    NSMutableDictionary *UIProps = [[NSUserDefaults standardUserDefaults] objectForKey:@"UIConfig"];
+    if (!UIProps || [UIProps count] == 0) {
+        NSLog(@"ERROR: Could not find base UIProps array when saving! Bailing");
+        UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"No saved UIConfig" message:@"Cannot export. Edit and save save UI elements first" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [al show];
+        return;
+    }
+    id plist = [NSPropertyListSerialization dataFromPropertyList:(id)UIProps format:NSPropertyListXMLFormat_v1_0 errorDescription:nil];
+    
+    // TODO: update this with app store link?
+    NSString *emailTitle = @"UIConfig from UIHelper";
+    NSString *messageBody = @"Import this file into Xcode project and then see _____ for extraction code. Behold your configured UI elements! Now make em sing!";
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+    [mc setSubject:emailTitle];
+    [mc setMessageBody:messageBody isHTML:NO];
+    
+    NSString *mimeType = @"application/xml";
+    //NOTE: can do a check here for it if we want to do other file types
+    
+    [mc addAttachmentData:plist mimeType:mimeType fileName:@"UIConfigXML"]; // TODO: unique names
+    
+    [self presentViewController:mc animated:YES completion:NULL];
+    
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail Cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail Saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail Sent!");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail Fail!");
+            break;
+        default:
+            break;
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
 
 
 
@@ -376,14 +563,19 @@
         tgtView = [self.view viewWithTag:sendingSwitch.tag+100];
     }
     
+    self.dragObject.slidesDown = NO;
+    self.dragObject.slidesUp   = NO;
+    
     if (tgtView.tag == 111) {
-        self.slideDownButton.enabled = sendingSwitch.on;
+        self.bottomBarSlideButton.enabled = sendingSwitch.on;
+        self.dragObject.slidesUp = sendingSwitch.on;
     }
     else if(tgtView.tag ==112){
-        self.slideUpButton.enabled = sendingSwitch.on;
+        self.topBarSlideButton.enabled = sendingSwitch.on;
+        self.dragObject.slidesDown = sendingSwitch.on;
     }
     
-    self.dragObject.slidesUpDown = sendingSwitch.on;
+ 
     
 }
 
@@ -391,7 +583,7 @@
 {
     // note: must use a distinct button + tag assoc draggable view in this case currently
     // using tagging so the view it targets can be reconfigured that way
-    DraggableView *tgtView = (DraggableView*)[self.view viewWithTag:self.slideUpButton.tag+100];
+    DraggableView *tgtView = (DraggableView*)[self.view viewWithTag:self.topBarSlideButton.tag+100];
     float down = tgtView.bounds.size.height/2;
     float curY = tgtView.center.y;
     if (curY < down){
@@ -418,10 +610,10 @@
 {
     // note: must use a distinct button + tag assoc draggable view in this case currently
     // using tagging so the view it targets can be reconfigured that way
-    DraggableView *tgtView = (DraggableView*)[self.view viewWithTag:self.slideDownButton.tag+100];
+    DraggableView *tgtView = (DraggableView*)[self.view viewWithTag:self.bottomBarSlideButton.tag+100];
  
     //TODO:set for orientations messy here but.. button ctr is safe ref
-    float up = self.slideDownButton.center.y;
+    float up = self.bottomBarSlideButton.center.y;
     float curY = tgtView.center.y;
     if (curY > up){
         // its farther off screen than it should be, slide it back up

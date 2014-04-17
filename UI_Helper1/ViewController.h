@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import <MessageUI/MessageUI.h>
 #import "DraggableView.h"
 #import "PropsMenuView.h"
 #import "FXMenuView.h"
 
-@interface ViewController : UIViewController<UIImagePickerControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate,UIPopoverControllerDelegate>
+@interface ViewController : UIViewController<UIImagePickerControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate,UIPopoverControllerDelegate, MFMailComposeViewControllerDelegate>
 
 @property (nonatomic) BOOL isEditing;
 
@@ -41,8 +42,8 @@
 @property (strong)IBOutlet UIButton *testButton;
 
 // buttons in zones for sliding up and down menus from top or bottom. TODO: use touch zones instead?
-@property (strong)IBOutlet UIButton *slideUpButton;
-@property (strong)IBOutlet UIButton *slideDownButton;
+@property (strong)IBOutlet UIButton *topBarSlideButton;
+@property (strong)IBOutlet UIButton *bottomBarSlideButton;
 
 @property (strong)IBOutlet NSMutableDictionary *currentViewEdits;
 
@@ -55,6 +56,8 @@
 
 - (IBAction)showViewPropsMenu:(id)sender;
 - (IBAction)dismissViewPropsMenu:(id)sender;
+- (IBAction)saveViewProps:(UIView*)tgtView; //will call auto when done with props edits for now
+
 - (IBAction)resetToDefault:(id)sender;
 - (IBAction)tapSlideUpUI:(id)sender;
 - (IBAction)tapSlideDownUI:(id)sender;
@@ -64,6 +67,8 @@
 - (IBAction)showHideView:(id)sender;
 - (IBAction)enableViewEdits:(id)sender;
 - (IBAction)doneEditing:(id)sender;
+- (IBAction)emailEditedUIPlist;
+
 
 
 - (IBAction)showInfoDeets:(id)sender;

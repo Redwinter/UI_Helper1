@@ -14,8 +14,10 @@
 @property (nonatomic) BOOL canDrag;
 @property (nonatomic) BOOL isShadowed;
 @property (nonatomic) BOOL isRounded;
-@property (nonatomic) BOOL slidesUpDown;
+@property (nonatomic) BOOL slidesUp;
+@property (nonatomic) BOOL slidesDown;
 @property (nonatomic) BOOL canFX;
+@property (nonatomic) CGPoint slideToPoint;
 @property (nonatomic) IBOutlet UIImageView *backgroundImage;
 @property (nonatomic) IBOutlet UILabel *label_1;
 

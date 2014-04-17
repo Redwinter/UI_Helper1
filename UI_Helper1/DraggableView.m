@@ -10,7 +10,7 @@
 
 @implementation DraggableView
 
-@synthesize isDragging, backgroundImage, isRounded, isShadowed, slidesUpDown, canFX;
+@synthesize isDragging, backgroundImage, isRounded, isShadowed, slidesUp, slidesDown,slideToPoint, canFX;
 
 - (id)initWithFrame:(CGRect)frame
 {
