@@ -240,6 +240,33 @@
     CGFloat GColor = [self.viewPropsMenu.tgtBGColor_G_.text floatValue];
     CGFloat BColor = [self.viewPropsMenu.tgtBGColor_B_.text floatValue];
     CGFloat Alpha = [self.viewPropsMenu.tgtBGColor_A_.text floatValue];
+    
+    // color val safety checks
+    if (RColor > 1) {
+        RColor = 1;
+    }
+    if (GColor > 1) {
+        GColor = 1;
+    }
+    if (BColor > 1) {
+        BColor = 1;
+    }
+    if (Alpha > 1) {
+        Alpha = 1;
+    }
+    if (RColor < 0) {
+        RColor = 0;
+    }
+    if (GColor < 0) {
+        GColor = 0;
+    }
+    if (BColor < 0) {
+        BColor = 0;
+    }
+    if (Alpha < 0) {
+        Alpha = 0;
+    }
+    
     self.dragObject.backgroundColor = [UIColor colorWithRed:RColor green:GColor blue:BColor alpha:Alpha];
     
     //labels
