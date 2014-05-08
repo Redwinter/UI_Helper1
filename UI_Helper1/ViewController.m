@@ -65,10 +65,11 @@
     NSDictionary *info = [aNotif userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     CGPoint bgCtr = self.viewPropsMenu.center;
-
+    
+    // hardcoded out of frustration
+    //TODO: for other view orients checking against width unintuitively, because landscape
     CGPoint blrg = [self.activeTextField convertPoint:self.activeTextField.center toView:self.view];
     
-    //TODO: for other view orients checking against width unintuitively, because landscape
     NSLog(@"%@ is act txt ctr", NSStringFromCGPoint(self.activeTextField.center));
     if (blrg.y > 400.0f) {
         // push it up
@@ -240,6 +241,9 @@
     self.editObject = nil; // TODO: excess and unneeded? Drag Obj handles
     self.viewFXMenu.hidden = YES;
     [self hideControls:sender];
+    if (self.activeTextField) {
+        [self.activeTextField resignFirstResponder];
+    }
     
 }
 
